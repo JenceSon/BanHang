@@ -67,12 +67,13 @@ namespace BanHang.SellerPages
             AmountTextBox.Text = "0";
             ImgNameLabel.Text = "not found";
             ImgPictureBox.Image = null;
+            this.pathImg = "";
 
         }
         private void PriceTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
+                (e.KeyChar != '.')&&(e.KeyChar != '-'))
             {
                 e.Handled = true;
             }
@@ -85,7 +86,7 @@ namespace BanHang.SellerPages
         }
         private void AmountTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-'))
             {
                 e.Handled = true;
             }
@@ -100,9 +101,11 @@ namespace BanHang.SellerPages
             {
                 ImgPictureBox.Image = new Bitmap(ofd.FileName);
                 ImgNameLabel.Text = ofd.SafeFileName;
-                pathImg = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName
-                    + "\\IMG\\Product_n_variant\\"
-                    + ImgNameLabel.Text;
+                pathImg = ofd.FileName;
+            }
+            else
+            {
+                pathImg = "";
             }
         }
 
@@ -130,7 +133,45 @@ namespace BanHang.SellerPages
             cmd.Parameters.AddWithValue("@cat",(CategoryComboBox.Text == ""? DBNull.Value : CategoryComboBox.SelectedValue.ToString()));
             cmd.Parameters.AddWithValue("@sid", SellerMainPage.shop.Shop_id);
             cmd.Parameters.AddWithValue("@img",(ImgNameLabel.Text == "not found" ? DBNull.Value : ImgNameLabel.Text));
+            cmd.Parameters.AddWithValue("@result", "");
 
+            conn.Open();
+            string res = cmd.ExecuteScalar().ToString(); 
+            conn.Close();
+
+            if(res == "Successfully adding")
+            {
+                MessageBox.Show(res,"Notification",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+                //copy img to repo
+                if(ImgNameLabel.Text != "not found") //has image
+                {
+                    string des = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName
+                    + "\\IMG\\Product_n_variant\\"
+                    + ImgNameLabel.Text;
+                    if(!File.Exists(des)) //not existed yet
+                    {
+                        File.Copy(pathImg, des, true);
+                    }
+                    
+                    
+                }
+                //update list product
+                SellerMainPage.Products.Add(new Product(PID.Text));
+            }
+            else
+            {
+                string[] listError = res.Split('_');
+                int i = 0;
+                res = "";
+                while(i < listError.Count())
+                {
+                    res += (listError[i] + "\n");
+                    i++;
+                }
+                MessageBox.Show(res,"Fail",MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
     }
 }

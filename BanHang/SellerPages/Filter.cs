@@ -10,11 +10,20 @@ using System.Windows.Forms;
 
 namespace BanHang.SellerPages
 {
-    public partial class ModifyProduct : Form
+    public partial class Filter : UserControl
     {
-        public ModifyProduct(string productId)
+        public Filter()
         {
             InitializeComponent();
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            //TODO
+
+
+            this.Enabled = false;
+            this.Visible = false;
         }
     }
 }

@@ -48,6 +48,7 @@ namespace BanHang.SellerPages
         }
         public void LoadProducts()
         {
+            this.ProductTable.Rows.Clear();
             IEnumerator<Product> it = SellerMainPage.Products.GetEnumerator();
             while (it.MoveNext())
             {

@@ -21,6 +21,8 @@ namespace BanHang.SellerPages
 
         public void LoadFinance()
         {
+            this.ListProductRevenue.Rows.Clear();
+
             SqlConnection conn = new SqlConnection(ConnectDB.connString);
             SqlCommand cmd = new SqlCommand(@"Select * from dbo.sum_revenue(@shopID,@startDate,@endDate)", conn);
             cmd.Parameters.AddWithValue("@shopID", SellerMainPage.shop.Shop_id);

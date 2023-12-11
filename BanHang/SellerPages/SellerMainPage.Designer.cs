@@ -40,13 +40,16 @@
             finance = new Finance();
             listProducts = new ListProducts();
             shopInformation = new ShopInformation();
+            RefreshPictureBox = new PictureBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)RefreshPictureBox).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(RefreshPictureBox);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(LogoButton);
             panel1.Location = new Point(4, 2);
@@ -164,6 +167,17 @@
             shopInformation.Size = new Size(598, 384);
             shopInformation.TabIndex = 4;
             // 
+            // RefreshPictureBox
+            // 
+            RefreshPictureBox.Image = Properties.Resources.refresh_button;
+            RefreshPictureBox.Location = new Point(754, 7);
+            RefreshPictureBox.Name = "RefreshPictureBox";
+            RefreshPictureBox.Size = new Size(30, 30);
+            RefreshPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            RefreshPictureBox.TabIndex = 4;
+            RefreshPictureBox.TabStop = false;
+            RefreshPictureBox.Click += RefreshPictureBox_Click;
+            // 
             // SellerMainPage
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -180,6 +194,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)RefreshPictureBox).EndInit();
             ResumeLayout(false);
         }
 
@@ -196,5 +211,6 @@
         private Finance finance;
         private ListProducts listProducts;
         private ShopInformation shopInformation;
+        private PictureBox RefreshPictureBox;
     }
 }

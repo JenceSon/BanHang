@@ -365,7 +365,7 @@ begin
 		set @result = @result + 'Total remaining can not be a negative number_'
 	if @price < 0 
 		set @result = @result + 'Price can not be a negative number_'
-	if @product_id not like 'PNI%' or LEN(@product_id) != 9
+	if @product_id not like 'PID%' or LEN(@product_id) != 9
 		set @result = @result + 'Invalid product id format_'
 	if @result = ''
 	begin
@@ -395,6 +395,7 @@ begin
 				@img)
 		set @result = 'Successfully adding'
 	end
+	select @result
 end
 go
 --drop procedure delete_product
@@ -404,7 +405,7 @@ create procedure delete_product
 as
 begin
 	if not exists (select * from Product where product_id = @product_id)
-		set @result = @result + 'Invalid product name_'
+		set @result = @result + 'Invalid product name'
 	if @result = ''
 	begin
 		--delete belong and variant fisrt
@@ -435,6 +436,7 @@ begin
 		delete Product where product_id = @product_id
 		set @result = 'Successfully deleting'
 	end
+	select @result
 end
 go
 --drop procedure update_product
@@ -458,7 +460,7 @@ begin
 	
 	if @pid_current != @pid_new and exists(select * from Product where product_id=@pid_new)
 		set @result = @result + 'Product ID has already existed_'
-	if @pid_current != @pid_new and (@pid_new not like 'PNI%' or len(@pid_new) != 9)
+	if @pid_current != @pid_new and (@pid_new not like 'PID%' or len(@pid_new) != 9)
 		set @result = @result + 'Invalid product id format_'
 	if @total_remaining < 0
 		set @result = @result + 'Total remaining can not be a negative number_'
@@ -498,6 +500,7 @@ begin
 
 		set @result = 'Successfully updating'
 	end
+	select @result
 end
 go
 ---3 procedure

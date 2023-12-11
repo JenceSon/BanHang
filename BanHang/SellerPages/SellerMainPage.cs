@@ -95,12 +95,19 @@ namespace BanHang.SellerPages
         #endregion
 
         #region method
-        public void RefreshShopInfo()
+        public void Refresh()
         {
             this.Text = "Hello " + shop.Name;
             this.shopInformation.LoadShopInfo();
+            this.finance.LoadFinance();
+            this.listProducts.LoadProducts();
         }
 
         #endregion
+
+        private void RefreshPictureBox_Click(object sender, EventArgs e)
+        {
+            Refresh();
+        }
     }
 }

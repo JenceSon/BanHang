@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             ListProducts = new Panel();
+            filterControl = new Filter();
             panel1 = new Panel();
+            FilterPB = new PictureBox();
+            RefreshPB = new PictureBox();
             SeeVariantBtn = new Button();
             DelBtn = new Button();
             ModifyBtn = new Button();
-            FilterBtn = new Button();
             AddProductBtn = new Button();
             ProductsTable = new DataGridView();
             ImageCol = new DataGridViewImageColumn();
@@ -49,12 +51,15 @@
             CatCol = new DataGridViewTextBoxColumn();
             ListProducts.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)FilterPB).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)RefreshPB).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ProductsTable).BeginInit();
             SuspendLayout();
             // 
             // ListProducts
             // 
             ListProducts.BackColor = Color.White;
+            ListProducts.Controls.Add(filterControl);
             ListProducts.Controls.Add(panel1);
             ListProducts.Controls.Add(ProductsTable);
             ListProducts.Location = new Point(12, 12);
@@ -62,18 +67,50 @@
             ListProducts.Size = new Size(1634, 951);
             ListProducts.TabIndex = 5;
             // 
+            // filterControl
+            // 
+            filterControl.Enabled = false;
+            filterControl.Location = new Point(25, 59);
+            filterControl.Name = "filterControl";
+            filterControl.Size = new Size(327, 309);
+            filterControl.TabIndex = 6;
+            filterControl.Visible = false;
+            // 
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(FilterPB);
+            panel1.Controls.Add(RefreshPB);
             panel1.Controls.Add(SeeVariantBtn);
             panel1.Controls.Add(DelBtn);
             panel1.Controls.Add(ModifyBtn);
-            panel1.Controls.Add(FilterBtn);
             panel1.Controls.Add(AddProductBtn);
             panel1.Location = new Point(11, 12);
             panel1.Name = "panel1";
             panel1.Size = new Size(1611, 56);
             panel1.TabIndex = 14;
+            // 
+            // FilterPB
+            // 
+            FilterPB.Image = Properties.Resources._1608702_filter_icon;
+            FilterPB.Location = new Point(14, 12);
+            FilterPB.Name = "FilterPB";
+            FilterPB.Size = new Size(30, 30);
+            FilterPB.SizeMode = PictureBoxSizeMode.StretchImage;
+            FilterPB.TabIndex = 15;
+            FilterPB.TabStop = false;
+            FilterPB.Click += FilterPB_Click;
+            // 
+            // RefreshPB
+            // 
+            RefreshPB.Image = Properties.Resources.refresh_button;
+            RefreshPB.Location = new Point(68, 11);
+            RefreshPB.Name = "RefreshPB";
+            RefreshPB.Size = new Size(30, 30);
+            RefreshPB.SizeMode = PictureBoxSizeMode.StretchImage;
+            RefreshPB.TabIndex = 14;
+            RefreshPB.TabStop = false;
+            RefreshPB.Click += RefreshPB_Click;
             // 
             // SeeVariantBtn
             // 
@@ -99,6 +136,7 @@
             DelBtn.TabIndex = 12;
             DelBtn.Text = "Delete";
             DelBtn.UseVisualStyleBackColor = false;
+            DelBtn.Click += DelBtn_Click;
             // 
             // ModifyBtn
             // 
@@ -112,18 +150,6 @@
             ModifyBtn.Text = "Modify";
             ModifyBtn.UseVisualStyleBackColor = false;
             ModifyBtn.Click += ModifyBtn_Click;
-            // 
-            // FilterBtn
-            // 
-            FilterBtn.BackColor = Color.OrangeRed;
-            FilterBtn.FlatStyle = FlatStyle.Popup;
-            FilterBtn.ForeColor = Color.White;
-            FilterBtn.Location = new Point(3, 11);
-            FilterBtn.Name = "FilterBtn";
-            FilterBtn.Size = new Size(81, 29);
-            FilterBtn.TabIndex = 9;
-            FilterBtn.Text = "Filter";
-            FilterBtn.UseVisualStyleBackColor = false;
             // 
             // AddProductBtn
             // 
@@ -143,14 +169,14 @@
             ProductsTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             ProductsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ProductsTable.Columns.AddRange(new DataGridViewColumn[] { ImageCol, IDCol, NameCol, MinPriceCol, MaxPriceCol, DesCol, NoSaleCol, TotalRemainingCol, OnSaleCol, CatCol });
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            ProductsTable.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            ProductsTable.DefaultCellStyle = dataGridViewCellStyle2;
             ProductsTable.Location = new Point(11, 74);
             ProductsTable.Name = "ProductsTable";
             ProductsTable.RowHeadersWidth = 51;
@@ -172,14 +198,14 @@
             IDCol.HeaderText = "ID";
             IDCol.MinimumWidth = 6;
             IDCol.Name = "IDCol";
-            IDCol.Width = 90;
+            IDCol.Width = 125;
             // 
             // NameCol
             // 
             NameCol.HeaderText = "Name";
             NameCol.MinimumWidth = 6;
             NameCol.Name = "NameCol";
-            NameCol.Width = 150;
+            NameCol.Width = 160;
             // 
             // MinPriceCol
             // 
@@ -200,7 +226,7 @@
             DesCol.HeaderText = "Description";
             DesCol.MinimumWidth = 6;
             DesCol.Name = "DesCol";
-            DesCol.Width = 290;
+            DesCol.Width = 310;
             // 
             // NoSaleCol
             // 
@@ -225,10 +251,10 @@
             // 
             // CatCol
             // 
+            CatCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             CatCol.HeaderText = "Category";
             CatCol.MinimumWidth = 6;
             CatCol.Name = "CatCol";
-            CatCol.Width = 145;
             // 
             // ProductInformation
             // 
@@ -242,6 +268,8 @@
             Text = "ProductInformation";
             ListProducts.ResumeLayout(false);
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)FilterPB).EndInit();
+            ((System.ComponentModel.ISupportInitialize)RefreshPB).EndInit();
             ((System.ComponentModel.ISupportInitialize)ProductsTable).EndInit();
             ResumeLayout(false);
         }
@@ -253,9 +281,9 @@
         private Button SeeVariantBtn;
         private Button DelBtn;
         private Button ModifyBtn;
-        private Button FilterBtn;
         private Button AddProductBtn;
         private DataGridView ProductsTable;
+        private PictureBox RefreshPB;
         private DataGridViewImageColumn ImageCol;
         private DataGridViewTextBoxColumn IDCol;
         private DataGridViewTextBoxColumn NameCol;
@@ -266,5 +294,7 @@
         private DataGridViewTextBoxColumn TotalRemainingCol;
         private DataGridViewTextBoxColumn OnSaleCol;
         private DataGridViewTextBoxColumn CatCol;
+        private PictureBox FilterPB;
+        private Filter filterControl;
     }
 }

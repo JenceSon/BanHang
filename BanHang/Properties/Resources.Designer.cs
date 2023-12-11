@@ -63,6 +63,16 @@ namespace BanHang.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1608702_filter_icon {
+            get {
+                object obj = ResourceManager.GetObject("1608702_filter_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap automatic {
             get {
                 object obj = ResourceManager.GetObject("automatic", resourceCulture);

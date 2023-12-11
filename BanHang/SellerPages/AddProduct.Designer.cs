@@ -229,7 +229,6 @@
             // 
             PID.Location = new Point(716, 53);
             PID.Name = "PID";
-            PID.ReadOnly = true;
             PID.Size = new Size(202, 27);
             PID.TabIndex = 8;
             // 
