@@ -37,7 +37,7 @@
             FilterBtn = new Button();
             AddProductBtn = new Button();
             ProductsTable = new DataGridView();
-            ImageCol = new DataGridViewTextBoxColumn();
+            ImageCol = new DataGridViewImageColumn();
             IDCol = new DataGridViewTextBoxColumn();
             NameCol = new DataGridViewTextBoxColumn();
             MinPriceCol = new DataGridViewTextBoxColumn();
@@ -140,6 +140,7 @@
             // 
             // ProductsTable
             // 
+            ProductsTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             ProductsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ProductsTable.Columns.AddRange(new DataGridViewColumn[] { ImageCol, IDCol, NameCol, MinPriceCol, MaxPriceCol, DesCol, NoSaleCol, TotalRemainingCol, OnSaleCol, CatCol });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -158,10 +159,13 @@
             // 
             // ImageCol
             // 
+            ImageCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ImageCol.HeaderText = "Image";
             ImageCol.MinimumWidth = 6;
             ImageCol.Name = "ImageCol";
-            ImageCol.Width = 300;
+            ImageCol.Resizable = DataGridViewTriState.True;
+            ImageCol.SortMode = DataGridViewColumnSortMode.Automatic;
+            ImageCol.Width = 80;
             // 
             // IDCol
             // 
@@ -252,7 +256,7 @@
         private Button FilterBtn;
         private Button AddProductBtn;
         private DataGridView ProductsTable;
-        private DataGridViewTextBoxColumn ImageCol;
+        private DataGridViewImageColumn ImageCol;
         private DataGridViewTextBoxColumn IDCol;
         private DataGridViewTextBoxColumn NameCol;
         private DataGridViewTextBoxColumn MinPriceCol;

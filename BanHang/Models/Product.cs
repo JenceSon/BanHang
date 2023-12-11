@@ -11,7 +11,7 @@ namespace BanHang.Models
     {
         private string product_id;
         public string Product_id { get => product_id; set => product_id = value; }
-        private string name, des, img, catid;
+        private string name, des, img;
         private int totalRemaining, noSales, onSales;
         private double minPrice, maxPrice;
 
@@ -54,37 +54,23 @@ namespace BanHang.Models
                 cmd.Parameters.AddWithValue("@product_id", this.product_id);
 
                 conn.Open();
-                img = (string)cmd.ExecuteScalar();
+                img = cmd.ExecuteScalar().ToString();
                 conn.Close();
-
+                if (img == "") return "NULL.png";
                 return img;
-            }
-        }
-        public string CatId
-        {
-            get
-            {
-                SqlConnection conn = new SqlConnection(ConnectDB.connString);
-                SqlCommand cmd = new SqlCommand(@"Select category_id from Product where product_id = @product_id", conn);
-                cmd.Parameters.AddWithValue("@product_id", this.product_id);
-
-                conn.Open();
-                catid = (string)cmd.ExecuteScalar();
-                conn.Close();
-
-                return catid;
             }
         }
         public string CatName
         {
             get
             {
+
                 SqlConnection conn = new SqlConnection(ConnectDB.connString);
-                SqlCommand cmd = new SqlCommand(@"Select category_name from Category where catgory_id = @category_id", conn);
-                cmd.Parameters.AddWithValue("@category_id", this.catid);
+                SqlCommand cmd = new SqlCommand(@"Select c.category_name from Category c, Product p where c.category_id = p.category_id and p.product_id = @product_id", conn);
+                cmd.Parameters.AddWithValue("@product_id",this.product_id);
 
                 conn.Open();
-                string catname = (string)cmd.ExecuteScalar();
+                string catname = cmd.ExecuteScalar().ToString();
                 conn.Close();
                 return catname;
             }

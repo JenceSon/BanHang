@@ -16,18 +16,46 @@ namespace BanHang.SellerPages
         public ProductInformation()
         {
             InitializeComponent();
-            LoadProducts();
+            LoadProducts(SellerMainPage.Products);
         }
-        private void LoadProducts(List<Product> products = null)
+        public Image Resize(Image image,int w,int h)
         {
-            if (products == null)
+            Bitmap bmp = new Bitmap(w,h);
+            Graphics g = Graphics.FromImage(bmp);
+            g.DrawImage(image,0,0,w,h);
+            g.Dispose();
+            return bmp;
+        }
+        private void LoadProducts(List<Product> products)
+        {
+            if (products != null)
             {
+                string currentDir = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
                 IEnumerator<Product> it = SellerMainPage.Products.GetEnumerator();
                 while (it.MoveNext())
                 {
                     Product product = it.Current;
-                    ProductsTable.Rows.Add(
-                        product.Img,
+                    string fileName = product.Img;
+                    string pathImg = currentDir + "\\IMG\\Product_n_variant\\" + fileName;
+                    if ((fileName != "" || fileName != null) && File.Exists(pathImg))
+                    {
+                        Image img = Image.FromFile(pathImg);
+                        img = Resize(img, 300, 300);
+                        ProductsTable.Rows.Add(
+                        img,
+                        product.Product_id,
+                        product.Name,
+                        product.MinPrice,
+                        product.MaxPrice,
+                        product.Des,
+                        product.NoSales,
+                        product.TotalRemaining,
+                        product.OnSales,
+                        product.CatName
+                        );
+                    }
+                    else ProductsTable.Rows.Add(
+                        null,
                         product.Product_id,
                         product.Name,
                         product.MinPrice,

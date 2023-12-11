@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             panel3 = new Panel();
-            label6 = new Label();
+            ImgNameLabel = new Label();
+            AddImgBtn = new Button();
             panel4 = new Panel();
-            button1 = new Button();
+            ImgPictureBox = new PictureBox();
             ResetButton = new Button();
             SaveButton = new Button();
             panel2 = new Panel();
@@ -42,7 +43,7 @@
             label4 = new Label();
             panel1 = new Panel();
             generateID = new PictureBox();
-            textBox1 = new TextBox();
+            PID = new TextBox();
             label1 = new Label();
             label3 = new Label();
             DescriptionTextBox = new TextBox();
@@ -52,6 +53,8 @@
             ProductNameTextBox = new TextBox();
             NameLabel = new Label();
             panel3.SuspendLayout();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ImgPictureBox).BeginInit();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)generateID).BeginInit();
@@ -59,42 +62,53 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(label6);
-            panel3.Controls.Add(panel4);
-            panel3.Controls.Add(button1);
+            panel3.Controls.Add(ImgNameLabel);
+            panel3.Controls.Add(AddImgBtn);
             panel3.Location = new Point(508, 313);
             panel3.Name = "panel3";
             panel3.Size = new Size(498, 302);
             panel3.TabIndex = 14;
             // 
-            // label6
+            // ImgNameLabel
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Italic | FontStyle.Underline);
-            label6.Location = new Point(123, 15);
-            label6.Name = "label6";
-            label6.Size = new Size(89, 20);
-            label6.TabIndex = 13;
-            label6.Text = "image name";
+            ImgNameLabel.AutoSize = true;
+            ImgNameLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic | FontStyle.Underline);
+            ImgNameLabel.Location = new Point(50, 96);
+            ImgNameLabel.Name = "ImgNameLabel";
+            ImgNameLabel.Size = new Size(70, 20);
+            ImgNameLabel.TabIndex = 13;
+            ImgNameLabel.Text = "not found";
+            ImgNameLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // AddImgBtn
+            // 
+            AddImgBtn.BackColor = Color.White;
+            AddImgBtn.FlatStyle = FlatStyle.Popup;
+            AddImgBtn.ForeColor = Color.Black;
+            AddImgBtn.Location = new Point(39, 26);
+            AddImgBtn.Name = "AddImgBtn";
+            AddImgBtn.Size = new Size(93, 29);
+            AddImgBtn.TabIndex = 10;
+            AddImgBtn.Text = "Add Image";
+            AddImgBtn.UseVisualStyleBackColor = false;
+            AddImgBtn.Click += AddImgBtn_Click;
             // 
             // panel4
             // 
-            panel4.Location = new Point(12, 48);
+            panel4.Controls.Add(ImgPictureBox);
+            panel4.Location = new Point(691, 312);
             panel4.Name = "panel4";
-            panel4.Size = new Size(471, 244);
+            panel4.Size = new Size(300, 300);
             panel4.TabIndex = 11;
             // 
-            // button1
+            // ImgPictureBox
             // 
-            button1.BackColor = Color.White;
-            button1.FlatStyle = FlatStyle.Popup;
-            button1.ForeColor = Color.Black;
-            button1.Location = new Point(12, 11);
-            button1.Name = "button1";
-            button1.Size = new Size(93, 29);
-            button1.TabIndex = 10;
-            button1.Text = "Add Image";
-            button1.UseVisualStyleBackColor = false;
+            ImgPictureBox.Location = new Point(0, 0);
+            ImgPictureBox.Name = "ImgPictureBox";
+            ImgPictureBox.Size = new Size(300, 300);
+            ImgPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            ImgPictureBox.TabIndex = 0;
+            ImgPictureBox.TabStop = false;
             // 
             // ResetButton
             // 
@@ -107,6 +121,7 @@
             ResetButton.TabIndex = 13;
             ResetButton.Text = "Reset";
             ResetButton.UseVisualStyleBackColor = false;
+            ResetButton.Click += ResetButton_Click;
             // 
             // SaveButton
             // 
@@ -119,6 +134,7 @@
             SaveButton.TabIndex = 12;
             SaveButton.Text = "Save";
             SaveButton.UseVisualStyleBackColor = false;
+            SaveButton.Click += SaveButton_Click;
             // 
             // panel2
             // 
@@ -140,6 +156,8 @@
             AmountTextBox.Name = "AmountTextBox";
             AmountTextBox.Size = new Size(174, 27);
             AmountTextBox.TabIndex = 11;
+            AmountTextBox.Text = "0";
+            AmountTextBox.KeyPress += AmountTextBox_KeyPress;
             // 
             // AmountLabel
             // 
@@ -156,6 +174,8 @@
             PriceTextBox.Name = "PriceTextBox";
             PriceTextBox.Size = new Size(174, 27);
             PriceTextBox.TabIndex = 9;
+            PriceTextBox.Text = "0";
+            PriceTextBox.KeyPress += PriceTextBox_KeyPress;
             // 
             // PriceLabel
             // 
@@ -180,7 +200,7 @@
             // 
             panel1.BackColor = Color.White;
             panel1.Controls.Add(generateID);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(PID);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(DescriptionTextBox);
@@ -196,19 +216,22 @@
             // 
             // generateID
             // 
+            generateID.Image = Properties.Resources.automatic;
             generateID.Location = new Point(945, 53);
             generateID.Name = "generateID";
             generateID.Size = new Size(31, 28);
             generateID.SizeMode = PictureBoxSizeMode.StretchImage;
             generateID.TabIndex = 9;
             generateID.TabStop = false;
+            generateID.Click += generateID_Click;
             // 
-            // textBox1
+            // PID
             // 
-            textBox1.Location = new Point(716, 53);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(202, 27);
-            textBox1.TabIndex = 8;
+            PID.Location = new Point(716, 53);
+            PID.Name = "PID";
+            PID.ReadOnly = true;
+            PID.Size = new Size(202, 27);
+            PID.TabIndex = 8;
             // 
             // label1
             // 
@@ -284,6 +307,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1022, 633);
+            Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(ResetButton);
             Controls.Add(SaveButton);
@@ -293,6 +317,8 @@
             Text = "AddProduct";
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ImgPictureBox).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
@@ -305,9 +331,9 @@
         #endregion
 
         private Panel panel3;
-        private Label label6;
+        private Label ImgNameLabel;
         private Panel panel4;
-        private Button button1;
+        private Button AddImgBtn;
         private Button ResetButton;
         private Button SaveButton;
         private Panel panel2;
@@ -318,7 +344,7 @@
         private Label label4;
         private Panel panel1;
         private PictureBox generateID;
-        private TextBox textBox1;
+        private TextBox PID;
         private Label label1;
         private Label label3;
         private TextBox DescriptionTextBox;
@@ -327,5 +353,6 @@
         private Label CategoryLabel;
         private TextBox ProductNameTextBox;
         private Label NameLabel;
+        private PictureBox ImgPictureBox;
     }
 }
