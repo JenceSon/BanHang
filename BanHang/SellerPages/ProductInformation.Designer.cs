@@ -30,11 +30,11 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             ListProducts = new Panel();
+            SearchBtn = new PictureBox();
             filterControl = new Filter();
             panel1 = new Panel();
             FilterPB = new PictureBox();
             RefreshPB = new PictureBox();
-            SeeVariantBtn = new Button();
             DelBtn = new Button();
             ModifyBtn = new Button();
             AddProductBtn = new Button();
@@ -49,13 +49,12 @@
             TotalRemainingCol = new DataGridViewTextBoxColumn();
             OnSaleCol = new DataGridViewTextBoxColumn();
             CatCol = new DataGridViewTextBoxColumn();
-            SearchBtn = new PictureBox();
             ListProducts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SearchBtn).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)FilterPB).BeginInit();
             ((System.ComponentModel.ISupportInitialize)RefreshPB).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ProductsTable).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)SearchBtn).BeginInit();
             SuspendLayout();
             // 
             // ListProducts
@@ -69,6 +68,19 @@
             ListProducts.Name = "ListProducts";
             ListProducts.Size = new Size(1634, 951);
             ListProducts.TabIndex = 5;
+            // 
+            // SearchBtn
+            // 
+            SearchBtn.Enabled = false;
+            SearchBtn.Image = Properties.Resources.search;
+            SearchBtn.Location = new Point(358, 59);
+            SearchBtn.Name = "SearchBtn";
+            SearchBtn.Size = new Size(30, 30);
+            SearchBtn.SizeMode = PictureBoxSizeMode.StretchImage;
+            SearchBtn.TabIndex = 16;
+            SearchBtn.TabStop = false;
+            SearchBtn.Visible = false;
+            SearchBtn.Click += SearchButton_Click;
             // 
             // filterControl
             // 
@@ -85,7 +97,6 @@
             panel1.BackColor = Color.White;
             panel1.Controls.Add(FilterPB);
             panel1.Controls.Add(RefreshPB);
-            panel1.Controls.Add(SeeVariantBtn);
             panel1.Controls.Add(DelBtn);
             panel1.Controls.Add(ModifyBtn);
             panel1.Controls.Add(AddProductBtn);
@@ -115,19 +126,6 @@
             RefreshPB.TabIndex = 14;
             RefreshPB.TabStop = false;
             RefreshPB.Click += RefreshPB_Click;
-            // 
-            // SeeVariantBtn
-            // 
-            SeeVariantBtn.BackColor = Color.OrangeRed;
-            SeeVariantBtn.FlatStyle = FlatStyle.Popup;
-            SeeVariantBtn.ForeColor = Color.White;
-            SeeVariantBtn.Location = new Point(983, 11);
-            SeeVariantBtn.Name = "SeeVariantBtn";
-            SeeVariantBtn.Size = new Size(113, 29);
-            SeeVariantBtn.TabIndex = 13;
-            SeeVariantBtn.Text = "Variants";
-            SeeVariantBtn.UseVisualStyleBackColor = false;
-            SeeVariantBtn.Click += SeeVariantBtn_Click;
             // 
             // DelBtn
             // 
@@ -260,19 +258,6 @@
             CatCol.MinimumWidth = 6;
             CatCol.Name = "CatCol";
             // 
-            // SearchBtn
-            // 
-            SearchBtn.Enabled = false;
-            SearchBtn.Image = Properties.Resources.search;
-            SearchBtn.Location = new Point(358, 59);
-            SearchBtn.Name = "SearchBtn";
-            SearchBtn.Size = new Size(30, 30);
-            SearchBtn.SizeMode = PictureBoxSizeMode.StretchImage;
-            SearchBtn.TabIndex = 16;
-            SearchBtn.TabStop = false;
-            SearchBtn.Visible = false;
-            SearchBtn.Click += SearchButton_Click;
-            // 
             // ProductInformation
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -284,11 +269,11 @@
             Name = "ProductInformation";
             Text = "ProductInformation";
             ListProducts.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)SearchBtn).EndInit();
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)FilterPB).EndInit();
             ((System.ComponentModel.ISupportInitialize)RefreshPB).EndInit();
             ((System.ComponentModel.ISupportInitialize)ProductsTable).EndInit();
-            ((System.ComponentModel.ISupportInitialize)SearchBtn).EndInit();
             ResumeLayout(false);
         }
 
@@ -296,7 +281,6 @@
 
         private Panel ListProducts;
         private Panel panel1;
-        private Button SeeVariantBtn;
         private Button DelBtn;
         private Button ModifyBtn;
         private Button AddProductBtn;
