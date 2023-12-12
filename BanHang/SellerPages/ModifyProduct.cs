@@ -213,5 +213,11 @@ namespace BanHang.SellerPages
             ImgNameLabel.Text = "not found";
 
         }
+
+        private void addInstanceBtn_Click(object sender, EventArgs e)
+        {
+            AddInstance form = new AddInstance(productIDtmp);
+            form.ShowDialog();
+        }
     }
 }

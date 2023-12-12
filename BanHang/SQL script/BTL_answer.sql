@@ -668,6 +668,8 @@ begin
 	return @newPID
 end
 go
+
+--drop function generate_IID
 create function generate_IID() -- ignore, just use to insert data more easily
 returns varchar(9)
 as
@@ -679,7 +681,7 @@ begin
 	declare @listIID table (postfix int)
 
 	insert into @listIID 
-	select Convert(int,REPLACE(p.instance_id,'PID','1')) as iid_trans 
+	select Convert(int,REPLACE(p.instance_id,'IID','1')) as iid_trans 
 	from Product_instance p  
 	order by iid_trans asc
 	
@@ -713,10 +715,10 @@ end
 
 go
 
---drop function no_instance
+--drop function no_instance_on_sale
 create function no_instance_on_sale
 (
-@product_id varchar(7)
+@product_id varchar(9)
 )
 returns int
 as

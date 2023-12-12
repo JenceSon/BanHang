@@ -226,6 +226,7 @@
             addInstanceBtn.TabIndex = 15;
             addInstanceBtn.Text = "Add Instance";
             addInstanceBtn.UseVisualStyleBackColor = false;
+            addInstanceBtn.Click += addInstanceBtn_Click;
             // 
             // OnSaleLabel
             // 
