@@ -64,13 +64,18 @@ namespace BanHang.Models
         {
             get
             {
-
                 SqlConnection conn = new SqlConnection(ConnectDB.connString);
                 SqlCommand cmd = new SqlCommand(@"Select c.category_name from Category c, Product p where c.category_id = p.category_id and p.product_id = @product_id", conn);
                 cmd.Parameters.AddWithValue("@product_id",this.product_id);
 
                 conn.Open();
-                string catname = cmd.ExecuteScalar().ToString();
+                object value = cmd.ExecuteScalar();
+                if(value == null)
+                {
+                    conn.Close() ;
+                    return "";
+                }
+                string catname = value.ToString();
                 conn.Close();
                 return catname;
             }

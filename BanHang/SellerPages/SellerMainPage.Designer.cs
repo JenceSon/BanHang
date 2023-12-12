@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SellerMainPage));
             panel1 = new Panel();
+            RefreshPictureBox = new PictureBox();
             label1 = new Label();
             LogoButton = new Button();
             panel2 = new Panel();
@@ -40,10 +41,9 @@
             finance = new Finance();
             listProducts = new ListProducts();
             shopInformation = new ShopInformation();
-            RefreshPictureBox = new PictureBox();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RefreshPictureBox).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -56,6 +56,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(791, 47);
             panel1.TabIndex = 0;
+            // 
+            // RefreshPictureBox
+            // 
+            RefreshPictureBox.Image = Properties.Resources.refresh_button;
+            RefreshPictureBox.Location = new Point(754, 7);
+            RefreshPictureBox.Name = "RefreshPictureBox";
+            RefreshPictureBox.Size = new Size(30, 30);
+            RefreshPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            RefreshPictureBox.TabIndex = 4;
+            RefreshPictureBox.TabStop = false;
+            RefreshPictureBox.Click += RefreshPictureBox_Click;
             // 
             // label1
             // 
@@ -167,34 +178,25 @@
             shopInformation.Size = new Size(598, 384);
             shopInformation.TabIndex = 4;
             // 
-            // RefreshPictureBox
-            // 
-            RefreshPictureBox.Image = Properties.Resources.refresh_button;
-            RefreshPictureBox.Location = new Point(754, 7);
-            RefreshPictureBox.Name = "RefreshPictureBox";
-            RefreshPictureBox.Size = new Size(30, 30);
-            RefreshPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            RefreshPictureBox.TabIndex = 4;
-            RefreshPictureBox.TabStop = false;
-            RefreshPictureBox.Click += RefreshPictureBox_Click;
-            // 
             // SellerMainPage
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(800, 450);
+            ControlBox = false;
             Controls.Add(shopInformation);
             Controls.Add(listProducts);
             Controls.Add(finance);
             Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "SellerMainPage";
             Text = "SellerMainPage";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)RefreshPictureBox).EndInit();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 

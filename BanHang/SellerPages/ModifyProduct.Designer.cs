@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModifyProduct));
             panel1 = new Panel();
             generateID = new PictureBox();
             PidTextBox = new TextBox();
@@ -53,6 +54,7 @@
             PriceLabel = new Label();
             label4 = new Label();
             panel3 = new Panel();
+            DelImgBtn = new Button();
             ImagePB = new PictureBox();
             ImgNameLabel = new Label();
             AddImgBtn = new Button();
@@ -306,6 +308,7 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(DelImgBtn);
             panel3.Controls.Add(ImagePB);
             panel3.Controls.Add(ImgNameLabel);
             panel3.Controls.Add(AddImgBtn);
@@ -313,6 +316,19 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(498, 307);
             panel3.TabIndex = 17;
+            // 
+            // DelImgBtn
+            // 
+            DelImgBtn.BackColor = Color.White;
+            DelImgBtn.FlatStyle = FlatStyle.Popup;
+            DelImgBtn.ForeColor = Color.Black;
+            DelImgBtn.Location = new Point(17, 59);
+            DelImgBtn.Name = "DelImgBtn";
+            DelImgBtn.Size = new Size(114, 29);
+            DelImgBtn.TabIndex = 15;
+            DelImgBtn.Text = "Delete Image";
+            DelImgBtn.UseVisualStyleBackColor = false;
+            DelImgBtn.Click += DelImgBtn_Click;
             // 
             // ImagePB
             // 
@@ -326,14 +342,12 @@
             // ImgNameLabel
             // 
             ImgNameLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ImgNameLabel.AutoSize = true;
             ImgNameLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic | FontStyle.Underline);
-            ImgNameLabel.Location = new Point(17, 68);
+            ImgNameLabel.Location = new Point(17, 96);
             ImgNameLabel.Name = "ImgNameLabel";
-            ImgNameLabel.Size = new Size(70, 20);
+            ImgNameLabel.Size = new Size(161, 173);
             ImgNameLabel.TabIndex = 13;
             ImgNameLabel.Text = "not found";
-            ImgNameLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // AddImgBtn
             // 
@@ -342,7 +356,7 @@
             AddImgBtn.ForeColor = Color.Black;
             AddImgBtn.Location = new Point(17, 11);
             AddImgBtn.Name = "AddImgBtn";
-            AddImgBtn.Size = new Size(93, 29);
+            AddImgBtn.Size = new Size(114, 29);
             AddImgBtn.TabIndex = 10;
             AddImgBtn.Text = "Add Image";
             AddImgBtn.UseVisualStyleBackColor = false;
@@ -359,6 +373,7 @@
             Controls.Add(SaveButton);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ModifyProduct";
             Text = "ModifyProduct";
             panel1.ResumeLayout(false);
@@ -367,7 +382,6 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ImagePB).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -403,5 +417,6 @@
         private PictureBox ImagePB;
         private Label ImgNameLabel;
         private Button AddImgBtn;
+        private Button DelImgBtn;
     }
 }

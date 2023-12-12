@@ -26,6 +26,7 @@ namespace BanHang.SellerPages
         public LoginSeller()
         {
             InitializeComponent();
+            this.CenterToScreen();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)

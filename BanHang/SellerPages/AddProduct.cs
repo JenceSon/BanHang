@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BanHang.SellerPages
 {
@@ -18,6 +19,8 @@ namespace BanHang.SellerPages
         public AddProduct()
         {
             InitializeComponent();
+            this.CenterToScreen();
+
             #region get list of category
             SqlConnection conn = new SqlConnection(ConnectDB.connString);
             SqlCommand cmd = new SqlCommand("Select * from Category where category_name != 'ALL CATEGORIES'", conn);
@@ -173,6 +176,16 @@ namespace BanHang.SellerPages
                 MessageBox.Show(res,"Fail",MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
+        }
+
+        private void DelImgBtn_Click(object sender, EventArgs e)
+        {
+            string NullImgPath = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName
+                    + "\\IMG\\Product_n_variant\\"
+                    + "NULL.png";
+            ImgPictureBox.Image = System.Drawing.Image.FromFile(NullImgPath);
+            ImgNameLabel.Text = "not found";
+
         }
     }
 }

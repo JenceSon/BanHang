@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddProduct));
             panel3 = new Panel();
+            DelImgBtn = new Button();
+            ImgPictureBox = new PictureBox();
             ImgNameLabel = new Label();
             AddImgBtn = new Button();
             ResetButton = new Button();
@@ -50,16 +53,16 @@
             CategoryLabel = new Label();
             ProductNameTextBox = new TextBox();
             NameLabel = new Label();
-            ImgPictureBox = new PictureBox();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ImgPictureBox).BeginInit();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)generateID).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ImgPictureBox).BeginInit();
             SuspendLayout();
             // 
             // panel3
             // 
+            panel3.Controls.Add(DelImgBtn);
             panel3.Controls.Add(ImgPictureBox);
             panel3.Controls.Add(ImgNameLabel);
             panel3.Controls.Add(AddImgBtn);
@@ -68,17 +71,37 @@
             panel3.Size = new Size(498, 308);
             panel3.TabIndex = 14;
             // 
+            // DelImgBtn
+            // 
+            DelImgBtn.BackColor = Color.White;
+            DelImgBtn.FlatStyle = FlatStyle.Popup;
+            DelImgBtn.ForeColor = Color.Black;
+            DelImgBtn.Location = new Point(15, 59);
+            DelImgBtn.Name = "DelImgBtn";
+            DelImgBtn.Size = new Size(114, 29);
+            DelImgBtn.TabIndex = 16;
+            DelImgBtn.Text = "Delete Image";
+            DelImgBtn.UseVisualStyleBackColor = false;
+            DelImgBtn.Click += DelImgBtn_Click;
+            // 
+            // ImgPictureBox
+            // 
+            ImgPictureBox.Location = new Point(185, 3);
+            ImgPictureBox.Name = "ImgPictureBox";
+            ImgPictureBox.Size = new Size(250, 300);
+            ImgPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            ImgPictureBox.TabIndex = 0;
+            ImgPictureBox.TabStop = false;
+            // 
             // ImgNameLabel
             // 
             ImgNameLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ImgNameLabel.AutoSize = true;
             ImgNameLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic | FontStyle.Underline);
-            ImgNameLabel.Location = new Point(15, 67);
+            ImgNameLabel.Location = new Point(15, 96);
             ImgNameLabel.Name = "ImgNameLabel";
-            ImgNameLabel.Size = new Size(70, 20);
+            ImgNameLabel.Size = new Size(164, 172);
             ImgNameLabel.TabIndex = 13;
             ImgNameLabel.Text = "not found";
-            ImgNameLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // AddImgBtn
             // 
@@ -87,7 +110,7 @@
             AddImgBtn.ForeColor = Color.Black;
             AddImgBtn.Location = new Point(15, 12);
             AddImgBtn.Name = "AddImgBtn";
-            AddImgBtn.Size = new Size(93, 29);
+            AddImgBtn.Size = new Size(114, 29);
             AddImgBtn.TabIndex = 10;
             AddImgBtn.Text = "Add Image";
             AddImgBtn.UseVisualStyleBackColor = false;
@@ -284,15 +307,6 @@
             NameLabel.TabIndex = 0;
             NameLabel.Text = "Product Name";
             // 
-            // ImgPictureBox
-            // 
-            ImgPictureBox.Location = new Point(185, 3);
-            ImgPictureBox.Name = "ImgPictureBox";
-            ImgPictureBox.Size = new Size(250, 300);
-            ImgPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            ImgPictureBox.TabIndex = 0;
-            ImgPictureBox.TabStop = false;
-            // 
             // AddProduct
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -303,16 +317,16 @@
             Controls.Add(SaveButton);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AddProduct";
             Text = "AddProduct";
             panel3.ResumeLayout(false);
-            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ImgPictureBox).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)generateID).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ImgPictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -342,5 +356,6 @@
         private TextBox ProductNameTextBox;
         private Label NameLabel;
         private PictureBox ImgPictureBox;
+        private Button DelImgBtn;
     }
 }

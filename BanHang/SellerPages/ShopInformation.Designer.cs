@@ -368,11 +368,10 @@
             // 
             // ShopName
             // 
-            ShopName.AutoSize = true;
             ShopName.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            ShopName.Location = new Point(236, 11);
+            ShopName.Location = new Point(3, 11);
             ShopName.Name = "ShopName";
-            ShopName.Size = new Size(97, 28);
+            ShopName.Size = new Size(592, 28);
             ShopName.TabIndex = 1;
             ShopName.Text = "Overview";
             ShopName.TextAlign = ContentAlignment.MiddleCenter;

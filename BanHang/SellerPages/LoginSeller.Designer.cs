@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginSeller));
             panel1 = new Panel();
+            pictureBox1 = new PictureBox();
             CloseButton = new Button();
             LoginButton = new Button();
             PasswordTextBox = new TextBox();
@@ -37,11 +39,13 @@
             email = new Label();
             label1 = new Label();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.OrangeRed;
+            panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(CloseButton);
             panel1.Controls.Add(LoginButton);
             panel1.Controls.Add(PasswordTextBox);
@@ -53,6 +57,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(457, 426);
             panel1.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.logo_shopee;
+            pictureBox1.Location = new Point(250, 24);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(50, 50);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 14;
+            pictureBox1.TabStop = false;
             // 
             // CloseButton
             // 
@@ -137,9 +151,9 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(32, 24);
             label1.Name = "label1";
-            label1.Size = new Size(310, 41);
+            label1.Size = new Size(198, 41);
             label1.TabIndex = 7;
-            label1.Text = "Shopee Seller Centre";
+            label1.Text = "Seller Centre";
             // 
             // LoginSeller
             // 
@@ -147,10 +161,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(457, 426);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LoginSeller";
             Text = "LoginSeller";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -164,5 +181,6 @@
         private Label email;
         private Label label1;
         private Button CloseButton;
+        private PictureBox pictureBox1;
     }
 }

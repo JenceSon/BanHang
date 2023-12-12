@@ -19,6 +19,7 @@ namespace BanHang.SellerPages
         public SellerMainPage(string shop_id)
         {
             InitializeComponent();
+            this.CenterToScreen();
 
             #region create shop
             SqlConnection conn = new SqlConnection(ConnectDB.connString);

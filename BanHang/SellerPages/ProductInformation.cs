@@ -18,6 +18,8 @@ namespace BanHang.SellerPages
         public ProductInformation()
         {
             InitializeComponent();
+            this.CenterToScreen();
+
             LoadProducts(SellerMainPage.Products);
         }
         public Image Resize(Image image, int w, int h)

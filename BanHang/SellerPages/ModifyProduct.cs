@@ -21,6 +21,8 @@ namespace BanHang.SellerPages
         public ModifyProduct(string productId)
         {
             InitializeComponent();
+            this.CenterToScreen();
+
             #region get list of category
             SqlConnection conn = new SqlConnection(ConnectDB.connString);
             SqlCommand cmd = new SqlCommand("Select * from Category where category_name != 'ALL CATEGORIES'", conn);
@@ -125,7 +127,7 @@ namespace BanHang.SellerPages
 
                 }
                 //update list product
-                SellerMainPage.Products.RemoveAll(x=> x.Product_id == productIDtmp);
+                SellerMainPage.Products.RemoveAll(x => x.Product_id == productIDtmp);
                 SellerMainPage.Products.Add(new Product(PidTextBox.Text));
                 productIDtmp = PidTextBox.Text;
             }
@@ -200,6 +202,16 @@ namespace BanHang.SellerPages
         private void generateID_Click(object sender, EventArgs e)
         {
             PidTextBox.Text = getNewPID();
+        }
+
+        private void DelImgBtn_Click(object sender, EventArgs e)
+        {
+            string NullImgPath = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName
+                    + "\\IMG\\Product_n_variant\\"
+                    + "NULL.png";
+            ImagePB.Image = Image.FromFile(NullImgPath);
+            ImgNameLabel.Text = "not found";
+
         }
     }
 }

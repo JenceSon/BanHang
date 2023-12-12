@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductInformation));
             ListProducts = new Panel();
             SearchBtn = new PictureBox();
             filterControl = new Filter();
@@ -265,6 +266,7 @@
             ClientSize = new Size(1658, 975);
             Controls.Add(ListProducts);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "ProductInformation";
             Text = "ProductInformation";
