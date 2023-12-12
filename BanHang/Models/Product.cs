@@ -140,11 +140,7 @@ namespace BanHang.Models
             get
             {
                 SqlConnection conn = new SqlConnection(ConnectDB.connString);
-                SqlCommand cmd = new SqlCommand(
-                    @"select count(*) as num
-                    from Product_instance
-                    where product_id = @product_id and instance_id not in 
-                    (select instance_id from Is_contained)", conn);
+                SqlCommand cmd = new SqlCommand(@"select dbo.no_instance_on_sale(@product_id) as num", conn);
                 cmd.Parameters.AddWithValue("@product_id", this.product_id);
 
                 conn.Open();

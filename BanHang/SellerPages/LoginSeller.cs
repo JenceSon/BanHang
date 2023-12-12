@@ -30,7 +30,7 @@ namespace BanHang.SellerPages
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            
+
             //query
             SqlConnection conn = new SqlConnection(ConnectDB.connString);
             string query = @"select dbo.check_login_seller(@user_name,@email,@pwd)";
@@ -110,6 +110,5 @@ namespace BanHang.SellerPages
         {
             Application.Exit();
         }
-
     }
 }

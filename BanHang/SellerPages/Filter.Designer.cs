@@ -28,29 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox2 = new TextBox();
+            MinPriceTxt = new TextBox();
             label5 = new Label();
-            PriceTextBox = new TextBox();
+            MaxPriceTxt = new TextBox();
             PriceLabel = new Label();
-            AmountTextBox = new TextBox();
+            TotalRemainFromTxt = new TextBox();
             AmountLabel = new Label();
-            textBox1 = new TextBox();
+            TotalRemainToTxt = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
+            NoSalesToTxt = new TextBox();
+            NoSalesFromTxt = new TextBox();
             label3 = new Label();
             CategoryComboBox = new ComboBox();
             CategoryLabel = new Label();
-            SearchButton = new Button();
+            label4 = new Label();
+            OnSalesToTxt = new TextBox();
+            OnSaleFromTxt = new TextBox();
+            label6 = new Label();
             SuspendLayout();
             // 
-            // textBox2
+            // MinPriceTxt
             // 
-            textBox2.Location = new Point(133, 16);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(174, 27);
-            textBox2.TabIndex = 17;
+            MinPriceTxt.Location = new Point(133, 16);
+            MinPriceTxt.Name = "MinPriceTxt";
+            MinPriceTxt.Size = new Size(174, 27);
+            MinPriceTxt.TabIndex = 17;
+            MinPriceTxt.KeyPress += Double_KeyPress;
             // 
             // label5
             // 
@@ -61,12 +65,13 @@
             label5.TabIndex = 16;
             label5.Text = "Minimum price";
             // 
-            // PriceTextBox
+            // MaxPriceTxt
             // 
-            PriceTextBox.Location = new Point(133, 64);
-            PriceTextBox.Name = "PriceTextBox";
-            PriceTextBox.Size = new Size(174, 27);
-            PriceTextBox.TabIndex = 15;
+            MaxPriceTxt.Location = new Point(133, 64);
+            MaxPriceTxt.Name = "MaxPriceTxt";
+            MaxPriceTxt.Size = new Size(174, 27);
+            MaxPriceTxt.TabIndex = 15;
+            MaxPriceTxt.KeyPress += Double_KeyPress;
             // 
             // PriceLabel
             // 
@@ -77,12 +82,13 @@
             PriceLabel.TabIndex = 14;
             PriceLabel.Text = "Maximum price";
             // 
-            // AmountTextBox
+            // TotalRemainFromTxt
             // 
-            AmountTextBox.Location = new Point(133, 123);
-            AmountTextBox.Name = "AmountTextBox";
-            AmountTextBox.Size = new Size(68, 27);
-            AmountTextBox.TabIndex = 19;
+            TotalRemainFromTxt.Location = new Point(133, 123);
+            TotalRemainFromTxt.Name = "TotalRemainFromTxt";
+            TotalRemainFromTxt.Size = new Size(68, 27);
+            TotalRemainFromTxt.TabIndex = 19;
+            TotalRemainFromTxt.KeyPress += Int_KeyPress;
             // 
             // AmountLabel
             // 
@@ -93,12 +99,13 @@
             AmountLabel.TabIndex = 18;
             AmountLabel.Text = "In Stock from";
             // 
-            // textBox1
+            // TotalRemainToTxt
             // 
-            textBox1.Location = new Point(236, 123);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(68, 27);
-            textBox1.TabIndex = 20;
+            TotalRemainToTxt.Location = new Point(236, 123);
+            TotalRemainToTxt.Name = "TotalRemainToTxt";
+            TotalRemainToTxt.Size = new Size(68, 27);
+            TotalRemainToTxt.TabIndex = 20;
+            TotalRemainToTxt.KeyPress += Int_KeyPress;
             // 
             // label1
             // 
@@ -112,30 +119,32 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(207, 174);
+            label2.Location = new Point(207, 218);
             label2.Name = "label2";
             label2.Size = new Size(23, 20);
             label2.TabIndex = 25;
             label2.Text = "to";
             // 
-            // textBox3
+            // NoSalesToTxt
             // 
-            textBox3.Location = new Point(236, 171);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(68, 27);
-            textBox3.TabIndex = 24;
+            NoSalesToTxt.Location = new Point(236, 215);
+            NoSalesToTxt.Name = "NoSalesToTxt";
+            NoSalesToTxt.Size = new Size(68, 27);
+            NoSalesToTxt.TabIndex = 24;
+            NoSalesToTxt.KeyPress += Int_KeyPress;
             // 
-            // textBox4
+            // NoSalesFromTxt
             // 
-            textBox4.Location = new Point(133, 171);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(68, 27);
-            textBox4.TabIndex = 23;
+            NoSalesFromTxt.Location = new Point(133, 215);
+            NoSalesFromTxt.Name = "NoSalesFromTxt";
+            NoSalesFromTxt.Size = new Size(68, 27);
+            NoSalesFromTxt.TabIndex = 23;
+            NoSalesFromTxt.KeyPress += Int_KeyPress;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(18, 174);
+            label3.Location = new Point(18, 218);
             label3.Name = "label3";
             label3.Size = new Size(106, 20);
             label3.TabIndex = 22;
@@ -144,7 +153,7 @@
             // CategoryComboBox
             // 
             CategoryComboBox.FormattingEnabled = true;
-            CategoryComboBox.Location = new Point(90, 223);
+            CategoryComboBox.Location = new Point(90, 267);
             CategoryComboBox.Name = "CategoryComboBox";
             CategoryComboBox.Size = new Size(217, 28);
             CategoryComboBox.TabIndex = 27;
@@ -152,66 +161,93 @@
             // CategoryLabel
             // 
             CategoryLabel.AutoSize = true;
-            CategoryLabel.Location = new Point(18, 226);
+            CategoryLabel.Location = new Point(18, 270);
             CategoryLabel.Name = "CategoryLabel";
             CategoryLabel.Size = new Size(69, 20);
             CategoryLabel.TabIndex = 26;
             CategoryLabel.Text = "Category";
             // 
-            // SearchButton
+            // label4
             // 
-            SearchButton.BackColor = Color.OrangeRed;
-            SearchButton.FlatStyle = FlatStyle.Popup;
-            SearchButton.ForeColor = Color.White;
-            SearchButton.Location = new Point(226, 263);
-            SearchButton.Name = "SearchButton";
-            SearchButton.Size = new Size(81, 29);
-            SearchButton.TabIndex = 28;
-            SearchButton.Text = "Search";
-            SearchButton.UseVisualStyleBackColor = false;
-            SearchButton.Click += SearchButton_Click;
+            label4.AutoSize = true;
+            label4.Location = new Point(207, 173);
+            label4.Name = "label4";
+            label4.Size = new Size(23, 20);
+            label4.TabIndex = 31;
+            label4.Text = "to";
+            // 
+            // OnSalesToTxt
+            // 
+            OnSalesToTxt.Location = new Point(236, 170);
+            OnSalesToTxt.Name = "OnSalesToTxt";
+            OnSalesToTxt.Size = new Size(68, 27);
+            OnSalesToTxt.TabIndex = 30;
+            OnSalesToTxt.KeyPress += Int_KeyPress;
+            // 
+            // OnSaleFromTxt
+            // 
+            OnSaleFromTxt.Location = new Point(133, 170);
+            OnSaleFromTxt.Name = "OnSaleFromTxt";
+            OnSaleFromTxt.Size = new Size(68, 27);
+            OnSaleFromTxt.TabIndex = 29;
+            OnSaleFromTxt.KeyPress += Int_KeyPress;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(18, 173);
+            label6.Name = "label6";
+            label6.Size = new Size(94, 20);
+            label6.TabIndex = 28;
+            label6.Text = "On sale from";
             // 
             // Filter
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(SearchButton);
+            Controls.Add(label4);
+            Controls.Add(OnSalesToTxt);
+            Controls.Add(OnSaleFromTxt);
+            Controls.Add(label6);
             Controls.Add(CategoryComboBox);
             Controls.Add(CategoryLabel);
             Controls.Add(label2);
-            Controls.Add(textBox3);
-            Controls.Add(textBox4);
+            Controls.Add(NoSalesToTxt);
+            Controls.Add(NoSalesFromTxt);
             Controls.Add(label3);
             Controls.Add(label1);
-            Controls.Add(textBox1);
-            Controls.Add(AmountTextBox);
+            Controls.Add(TotalRemainToTxt);
+            Controls.Add(TotalRemainFromTxt);
             Controls.Add(AmountLabel);
-            Controls.Add(textBox2);
+            Controls.Add(MinPriceTxt);
             Controls.Add(label5);
-            Controls.Add(PriceTextBox);
+            Controls.Add(MaxPriceTxt);
             Controls.Add(PriceLabel);
             Name = "Filter";
-            Size = new Size(331, 306);
+            Size = new Size(331, 316);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox textBox2;
+        private TextBox MinPriceTxt;
         private Label label5;
-        private TextBox PriceTextBox;
+        private TextBox MaxPriceTxt;
         private Label PriceLabel;
-        private TextBox AmountTextBox;
+        private TextBox TotalRemainFromTxt;
         private Label AmountLabel;
-        private TextBox textBox1;
+        private TextBox TotalRemainToTxt;
         private Label label1;
         private Label label2;
-        private TextBox textBox3;
-        private TextBox textBox4;
+        private TextBox NoSalesToTxt;
+        private TextBox NoSalesFromTxt;
         private Label label3;
         private ComboBox CategoryComboBox;
         private Label CategoryLabel;
-        private Button SearchButton;
+        private Label label4;
+        private TextBox OnSalesToTxt;
+        private TextBox OnSaleFromTxt;
+        private Label label6;
     }
 }

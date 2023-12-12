@@ -446,7 +446,6 @@ create procedure update_product --when update, get all information from edit pan
 @des varchar(1000), 
 @name varchar(50),	
 @total_remaining int,
-@no_sales	int, --ignore because mustn't modify
 @min_price	decimal(10,1),
 @max_price	decimal(10,1),
 @cat varchar(9), 
@@ -485,11 +484,16 @@ begin
 
 	if @result = ''
 	begin
+		--update des first
+		if(@des is not null)
+			update Product set [description] = @des where product_id = @pid_current;
+		else
+			update Product set [description] = default where product_id = @pid_current;
+		
 		update Product
-		set [description] = @des,
+		set
 		[name] = @name,
 		total_remaining = @total_remaining,
-		no_sales = @no_sales,
 		minimum_price = @min_price,
 		maximum_price = @max_price,
 		category_id = @cat,
@@ -709,7 +713,8 @@ end
 
 go
 
-create function no_instance
+--drop function no_instance
+create function no_instance_on_sale
 (
 @product_id varchar(7)
 )
@@ -717,7 +722,7 @@ returns int
 as
 begin
 	declare @rs int
-	set @rs = (select count(*) from Product_instance where product_id = @product_id)
+	set @rs = (select count(*) as num from Product_instance where product_id = @product_id and instance_id not in(select instance_id from Is_contained))
 	return @rs
 end
 

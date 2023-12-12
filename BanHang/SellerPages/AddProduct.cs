@@ -31,6 +31,7 @@ namespace BanHang.SellerPages
             CategoryComboBox.DataSource = ds.Tables[0];
             CategoryComboBox.DisplayMember = "category_name";
             CategoryComboBox.ValueMember = "category_id";
+            CategoryComboBox.Text = "";
             #endregion
             //auto generate PID
             PID.Text = getNewPID();

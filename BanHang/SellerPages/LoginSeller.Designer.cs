@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            CloseButton = new Button();
             LoginButton = new Button();
             PasswordTextBox = new TextBox();
             EmailTextBox = new TextBox();
             PasswordLabel = new Label();
             email = new Label();
             label1 = new Label();
-            CloseButton = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -49,10 +49,25 @@
             panel1.Controls.Add(PasswordLabel);
             panel1.Controls.Add(email);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(331, 12);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(457, 426);
             panel1.TabIndex = 0;
+            // 
+            // CloseButton
+            // 
+            CloseButton.BackColor = Color.Snow;
+            CloseButton.Cursor = Cursors.Hand;
+            CloseButton.FlatStyle = FlatStyle.Popup;
+            CloseButton.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold);
+            CloseButton.ForeColor = Color.OrangeRed;
+            CloseButton.Location = new Point(156, 347);
+            CloseButton.Name = "CloseButton";
+            CloseButton.Size = new Size(144, 44);
+            CloseButton.TabIndex = 13;
+            CloseButton.Text = "Exist";
+            CloseButton.UseVisualStyleBackColor = false;
+            CloseButton.Click += CloseButton_Click;
             // 
             // LoginButton
             // 
@@ -126,26 +141,11 @@
             label1.TabIndex = 7;
             label1.Text = "Shopee Seller Centre";
             // 
-            // CloseButton
-            // 
-            CloseButton.BackColor = Color.Snow;
-            CloseButton.Cursor = Cursors.Hand;
-            CloseButton.FlatStyle = FlatStyle.Popup;
-            CloseButton.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold);
-            CloseButton.ForeColor = Color.OrangeRed;
-            CloseButton.Location = new Point(156, 347);
-            CloseButton.Name = "CloseButton";
-            CloseButton.Size = new Size(144, 44);
-            CloseButton.TabIndex = 13;
-            CloseButton.Text = "Exist";
-            CloseButton.UseVisualStyleBackColor = false;
-            CloseButton.Click += CloseButton_Click;
-            // 
             // LoginSeller
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(457, 426);
             Controls.Add(panel1);
             Name = "LoginSeller";
             Text = "LoginSeller";

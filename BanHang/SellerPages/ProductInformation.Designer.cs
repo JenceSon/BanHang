@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             ListProducts = new Panel();
             filterControl = new Filter();
             panel1 = new Panel();
@@ -49,16 +49,19 @@
             TotalRemainingCol = new DataGridViewTextBoxColumn();
             OnSaleCol = new DataGridViewTextBoxColumn();
             CatCol = new DataGridViewTextBoxColumn();
+            SearchBtn = new PictureBox();
             ListProducts.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)FilterPB).BeginInit();
             ((System.ComponentModel.ISupportInitialize)RefreshPB).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ProductsTable).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SearchBtn).BeginInit();
             SuspendLayout();
             // 
             // ListProducts
             // 
             ListProducts.BackColor = Color.White;
+            ListProducts.Controls.Add(SearchBtn);
             ListProducts.Controls.Add(filterControl);
             ListProducts.Controls.Add(panel1);
             ListProducts.Controls.Add(ProductsTable);
@@ -69,10 +72,11 @@
             // 
             // filterControl
             // 
+            filterControl.BackColor = SystemColors.Control;
             filterControl.Enabled = false;
             filterControl.Location = new Point(25, 59);
             filterControl.Name = "filterControl";
-            filterControl.Size = new Size(327, 309);
+            filterControl.Size = new Size(327, 334);
             filterControl.TabIndex = 6;
             filterControl.Visible = false;
             // 
@@ -104,7 +108,7 @@
             // RefreshPB
             // 
             RefreshPB.Image = Properties.Resources.refresh_button;
-            RefreshPB.Location = new Point(68, 11);
+            RefreshPB.Location = new Point(69, 12);
             RefreshPB.Name = "RefreshPB";
             RefreshPB.Size = new Size(30, 30);
             RefreshPB.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -169,14 +173,14 @@
             ProductsTable.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             ProductsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ProductsTable.Columns.AddRange(new DataGridViewColumn[] { ImageCol, IDCol, NameCol, MinPriceCol, MaxPriceCol, DesCol, NoSaleCol, TotalRemainingCol, OnSaleCol, CatCol });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            ProductsTable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            ProductsTable.DefaultCellStyle = dataGridViewCellStyle1;
             ProductsTable.Location = new Point(11, 74);
             ProductsTable.Name = "ProductsTable";
             ProductsTable.RowHeadersWidth = 51;
@@ -256,6 +260,19 @@
             CatCol.MinimumWidth = 6;
             CatCol.Name = "CatCol";
             // 
+            // SearchBtn
+            // 
+            SearchBtn.Enabled = false;
+            SearchBtn.Image = Properties.Resources.search;
+            SearchBtn.Location = new Point(358, 59);
+            SearchBtn.Name = "SearchBtn";
+            SearchBtn.Size = new Size(30, 30);
+            SearchBtn.SizeMode = PictureBoxSizeMode.StretchImage;
+            SearchBtn.TabIndex = 16;
+            SearchBtn.TabStop = false;
+            SearchBtn.Visible = false;
+            SearchBtn.Click += SearchButton_Click;
+            // 
             // ProductInformation
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -271,6 +288,7 @@
             ((System.ComponentModel.ISupportInitialize)FilterPB).EndInit();
             ((System.ComponentModel.ISupportInitialize)RefreshPB).EndInit();
             ((System.ComponentModel.ISupportInitialize)ProductsTable).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SearchBtn).EndInit();
             ResumeLayout(false);
         }
 
@@ -296,5 +314,6 @@
         private DataGridViewTextBoxColumn CatCol;
         private PictureBox FilterPB;
         private Filter filterControl;
+        private PictureBox SearchBtn;
     }
 }

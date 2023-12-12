@@ -30,7 +30,7 @@
         {
             panel1 = new Panel();
             generateID = new PictureBox();
-            textBox1 = new TextBox();
+            PidTextBox = new TextBox();
             label1 = new Label();
             label3 = new Label();
             DescriptionTextBox = new TextBox();
@@ -43,31 +43,31 @@
             SaveButton = new Button();
             panel2 = new Panel();
             addInstanceBtn = new Button();
-            noIns = new Label();
+            OnSaleLabel = new Label();
             label8 = new Label();
-            textBox2 = new TextBox();
+            MinPriceTextBox = new TextBox();
             label5 = new Label();
-            AmountTextBox = new TextBox();
+            TotalRemainTextBox = new TextBox();
             AmountLabel = new Label();
-            PriceTextBox = new TextBox();
+            MaxPriceTextBox = new TextBox();
             PriceLabel = new Label();
             label4 = new Label();
             panel3 = new Panel();
-            pictureBox1 = new PictureBox();
-            label6 = new Label();
-            button1 = new Button();
+            ImagePB = new PictureBox();
+            ImgNameLabel = new Label();
+            AddImgBtn = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)generateID).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ImagePB).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.White;
             panel1.Controls.Add(generateID);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(PidTextBox);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(DescriptionTextBox);
@@ -83,19 +83,21 @@
             // 
             // generateID
             // 
+            generateID.Image = Properties.Resources.automatic;
             generateID.Location = new Point(945, 53);
             generateID.Name = "generateID";
             generateID.Size = new Size(31, 28);
             generateID.SizeMode = PictureBoxSizeMode.StretchImage;
             generateID.TabIndex = 10;
             generateID.TabStop = false;
+            generateID.Click += generateID_Click;
             // 
-            // textBox1
+            // PidTextBox
             // 
-            textBox1.Location = new Point(716, 53);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(202, 27);
-            textBox1.TabIndex = 8;
+            PidTextBox.Location = new Point(716, 53);
+            PidTextBox.Name = "PidTextBox";
+            PidTextBox.Size = new Size(202, 27);
+            PidTextBox.TabIndex = 8;
             // 
             // label1
             // 
@@ -177,6 +179,7 @@
             ResetButton.TabIndex = 15;
             ResetButton.Text = "Reset";
             ResetButton.UseVisualStyleBackColor = false;
+            ResetButton.Click += ResetButton_Click;
             // 
             // SaveButton
             // 
@@ -189,19 +192,20 @@
             SaveButton.TabIndex = 14;
             SaveButton.Text = "Save";
             SaveButton.UseVisualStyleBackColor = false;
+            SaveButton.Click += SaveButton_Click;
             // 
             // panel2
             // 
             panel2.AutoSize = true;
             panel2.BackColor = Color.White;
             panel2.Controls.Add(addInstanceBtn);
-            panel2.Controls.Add(noIns);
+            panel2.Controls.Add(OnSaleLabel);
             panel2.Controls.Add(label8);
-            panel2.Controls.Add(textBox2);
+            panel2.Controls.Add(MinPriceTextBox);
             panel2.Controls.Add(label5);
-            panel2.Controls.Add(AmountTextBox);
+            panel2.Controls.Add(TotalRemainTextBox);
             panel2.Controls.Add(AmountLabel);
-            panel2.Controls.Add(PriceTextBox);
+            panel2.Controls.Add(MaxPriceTextBox);
             panel2.Controls.Add(PriceLabel);
             panel2.Controls.Add(label4);
             panel2.Location = new Point(12, 314);
@@ -221,14 +225,14 @@
             addInstanceBtn.Text = "Add Instance";
             addInstanceBtn.UseVisualStyleBackColor = false;
             // 
-            // noIns
+            // OnSaleLabel
             // 
-            noIns.AutoSize = true;
-            noIns.Location = new Point(162, 182);
-            noIns.Name = "noIns";
-            noIns.Size = new Size(17, 20);
-            noIns.TabIndex = 17;
-            noIns.Text = "0";
+            OnSaleLabel.AutoSize = true;
+            OnSaleLabel.Location = new Point(162, 182);
+            OnSaleLabel.Name = "OnSaleLabel";
+            OnSaleLabel.Size = new Size(17, 20);
+            OnSaleLabel.TabIndex = 17;
+            OnSaleLabel.Text = "0";
             // 
             // label8
             // 
@@ -239,12 +243,13 @@
             label8.TabIndex = 15;
             label8.Text = "On Sale";
             // 
-            // textBox2
+            // MinPriceTextBox
             // 
-            textBox2.Location = new Point(162, 45);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(174, 27);
-            textBox2.TabIndex = 13;
+            MinPriceTextBox.Location = new Point(162, 45);
+            MinPriceTextBox.Name = "MinPriceTextBox";
+            MinPriceTextBox.Size = new Size(174, 27);
+            MinPriceTextBox.TabIndex = 13;
+            MinPriceTextBox.KeyPress += PriceTextBox_KeyPress;
             // 
             // label5
             // 
@@ -255,12 +260,13 @@
             label5.TabIndex = 12;
             label5.Text = "Minimum price";
             // 
-            // AmountTextBox
+            // TotalRemainTextBox
             // 
-            AmountTextBox.Location = new Point(162, 135);
-            AmountTextBox.Name = "AmountTextBox";
-            AmountTextBox.Size = new Size(174, 27);
-            AmountTextBox.TabIndex = 11;
+            TotalRemainTextBox.Location = new Point(162, 135);
+            TotalRemainTextBox.Name = "TotalRemainTextBox";
+            TotalRemainTextBox.Size = new Size(174, 27);
+            TotalRemainTextBox.TabIndex = 11;
+            TotalRemainTextBox.KeyPress += AmountTextBox_KeyPress;
             // 
             // AmountLabel
             // 
@@ -271,12 +277,13 @@
             AmountLabel.TabIndex = 10;
             AmountLabel.Text = "In Stock";
             // 
-            // PriceTextBox
+            // MaxPriceTextBox
             // 
-            PriceTextBox.Location = new Point(162, 93);
-            PriceTextBox.Name = "PriceTextBox";
-            PriceTextBox.Size = new Size(174, 27);
-            PriceTextBox.TabIndex = 9;
+            MaxPriceTextBox.Location = new Point(162, 93);
+            MaxPriceTextBox.Name = "MaxPriceTextBox";
+            MaxPriceTextBox.Size = new Size(174, 27);
+            MaxPriceTextBox.TabIndex = 9;
+            MaxPriceTextBox.KeyPress += PriceTextBox_KeyPress;
             // 
             // PriceLabel
             // 
@@ -299,44 +306,47 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(pictureBox1);
-            panel3.Controls.Add(label6);
-            panel3.Controls.Add(button1);
+            panel3.Controls.Add(ImagePB);
+            panel3.Controls.Add(ImgNameLabel);
+            panel3.Controls.Add(AddImgBtn);
             panel3.Location = new Point(506, 314);
             panel3.Name = "panel3";
-            panel3.Size = new Size(498, 302);
+            panel3.Size = new Size(498, 307);
             panel3.TabIndex = 17;
             // 
-            // pictureBox1
+            // ImagePB
             // 
-            pictureBox1.Location = new Point(15, 48);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(468, 237);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 14;
-            pictureBox1.TabStop = false;
+            ImagePB.Location = new Point(184, 3);
+            ImagePB.Name = "ImagePB";
+            ImagePB.Size = new Size(250, 300);
+            ImagePB.SizeMode = PictureBoxSizeMode.StretchImage;
+            ImagePB.TabIndex = 14;
+            ImagePB.TabStop = false;
             // 
-            // label6
+            // ImgNameLabel
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Italic | FontStyle.Underline);
-            label6.Location = new Point(123, 15);
-            label6.Name = "label6";
-            label6.Size = new Size(89, 20);
-            label6.TabIndex = 13;
-            label6.Text = "image name";
+            ImgNameLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ImgNameLabel.AutoSize = true;
+            ImgNameLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic | FontStyle.Underline);
+            ImgNameLabel.Location = new Point(17, 68);
+            ImgNameLabel.Name = "ImgNameLabel";
+            ImgNameLabel.Size = new Size(70, 20);
+            ImgNameLabel.TabIndex = 13;
+            ImgNameLabel.Text = "not found";
+            ImgNameLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // button1
+            // AddImgBtn
             // 
-            button1.BackColor = Color.White;
-            button1.FlatStyle = FlatStyle.Popup;
-            button1.ForeColor = Color.Black;
-            button1.Location = new Point(12, 11);
-            button1.Name = "button1";
-            button1.Size = new Size(93, 29);
-            button1.TabIndex = 10;
-            button1.Text = "Add Image";
-            button1.UseVisualStyleBackColor = false;
+            AddImgBtn.BackColor = Color.White;
+            AddImgBtn.FlatStyle = FlatStyle.Popup;
+            AddImgBtn.ForeColor = Color.Black;
+            AddImgBtn.Location = new Point(17, 11);
+            AddImgBtn.Name = "AddImgBtn";
+            AddImgBtn.Size = new Size(93, 29);
+            AddImgBtn.TabIndex = 10;
+            AddImgBtn.Text = "Add Image";
+            AddImgBtn.UseVisualStyleBackColor = false;
+            AddImgBtn.Click += AddImgBtn_Click;
             // 
             // ModifyProduct
             // 
@@ -358,7 +368,7 @@
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ImagePB).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -367,7 +377,7 @@
 
         private Panel panel1;
         private PictureBox generateID;
-        private TextBox textBox1;
+        private TextBox PidTextBox;
         private Label label1;
         private Label label3;
         private TextBox DescriptionTextBox;
@@ -380,18 +390,18 @@
         private Button SaveButton;
         private Panel panel2;
         private Button addInstanceBtn;
-        private Label noIns;
+        private Label OnSaleLabel;
         private Label label8;
-        private TextBox textBox2;
+        private TextBox MinPriceTextBox;
         private Label label5;
-        private TextBox AmountTextBox;
+        private TextBox TotalRemainTextBox;
         private Label AmountLabel;
-        private TextBox PriceTextBox;
+        private TextBox MaxPriceTextBox;
         private Label PriceLabel;
         private Label label4;
         private Panel panel3;
-        private PictureBox pictureBox1;
-        private Label label6;
-        private Button button1;
+        private PictureBox ImagePB;
+        private Label ImgNameLabel;
+        private Button AddImgBtn;
     }
 }

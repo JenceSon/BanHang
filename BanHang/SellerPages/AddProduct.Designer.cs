@@ -31,8 +31,6 @@
             panel3 = new Panel();
             ImgNameLabel = new Label();
             AddImgBtn = new Button();
-            panel4 = new Panel();
-            ImgPictureBox = new PictureBox();
             ResetButton = new Button();
             SaveButton = new Button();
             panel2 = new Panel();
@@ -52,28 +50,30 @@
             CategoryLabel = new Label();
             ProductNameTextBox = new TextBox();
             NameLabel = new Label();
+            ImgPictureBox = new PictureBox();
             panel3.SuspendLayout();
-            panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ImgPictureBox).BeginInit();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)generateID).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ImgPictureBox).BeginInit();
             SuspendLayout();
             // 
             // panel3
             // 
+            panel3.Controls.Add(ImgPictureBox);
             panel3.Controls.Add(ImgNameLabel);
             panel3.Controls.Add(AddImgBtn);
             panel3.Location = new Point(508, 313);
             panel3.Name = "panel3";
-            panel3.Size = new Size(498, 302);
+            panel3.Size = new Size(498, 308);
             panel3.TabIndex = 14;
             // 
             // ImgNameLabel
             // 
+            ImgNameLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ImgNameLabel.AutoSize = true;
             ImgNameLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic | FontStyle.Underline);
-            ImgNameLabel.Location = new Point(50, 96);
+            ImgNameLabel.Location = new Point(15, 67);
             ImgNameLabel.Name = "ImgNameLabel";
             ImgNameLabel.Size = new Size(70, 20);
             ImgNameLabel.TabIndex = 13;
@@ -85,30 +85,13 @@
             AddImgBtn.BackColor = Color.White;
             AddImgBtn.FlatStyle = FlatStyle.Popup;
             AddImgBtn.ForeColor = Color.Black;
-            AddImgBtn.Location = new Point(39, 26);
+            AddImgBtn.Location = new Point(15, 12);
             AddImgBtn.Name = "AddImgBtn";
             AddImgBtn.Size = new Size(93, 29);
             AddImgBtn.TabIndex = 10;
             AddImgBtn.Text = "Add Image";
             AddImgBtn.UseVisualStyleBackColor = false;
             AddImgBtn.Click += AddImgBtn_Click;
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(ImgPictureBox);
-            panel4.Location = new Point(691, 312);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(300, 300);
-            panel4.TabIndex = 11;
-            // 
-            // ImgPictureBox
-            // 
-            ImgPictureBox.Location = new Point(0, 0);
-            ImgPictureBox.Name = "ImgPictureBox";
-            ImgPictureBox.Size = new Size(300, 300);
-            ImgPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            ImgPictureBox.TabIndex = 0;
-            ImgPictureBox.TabStop = false;
             // 
             // ResetButton
             // 
@@ -301,12 +284,20 @@
             NameLabel.TabIndex = 0;
             NameLabel.Text = "Product Name";
             // 
+            // ImgPictureBox
+            // 
+            ImgPictureBox.Location = new Point(185, 3);
+            ImgPictureBox.Name = "ImgPictureBox";
+            ImgPictureBox.Size = new Size(250, 300);
+            ImgPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            ImgPictureBox.TabIndex = 0;
+            ImgPictureBox.TabStop = false;
+            // 
             // AddProduct
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1022, 633);
-            Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(ResetButton);
             Controls.Add(SaveButton);
@@ -316,13 +307,12 @@
             Text = "AddProduct";
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)ImgPictureBox).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)generateID).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ImgPictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -331,7 +321,6 @@
 
         private Panel panel3;
         private Label ImgNameLabel;
-        private Panel panel4;
         private Button AddImgBtn;
         private Button ResetButton;
         private Button SaveButton;

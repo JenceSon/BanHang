@@ -30,3 +30,5 @@ insert into Seller values ('UID123456','SID123456')
 select dbo.check_login_seller('Jence',null,'123')
 
 insert into Category values('CAT123456','Book',default)
+
+exec dbo.filter_product @min_price_filter = 0, @max_price_filter = 100000, @sid_filter = 'SID123456'

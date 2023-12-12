@@ -28,13 +28,13 @@ namespace BanHang.SellerPages
             g.Dispose();
             return bmp;
         }
-        private void LoadProducts(List<Product> products)
+        private void LoadProducts(List<Product> productsTmp)
         {
             this.ProductsTable.Rows.Clear();
-            if (products != null)
+            if (productsTmp != null)
             {
                 string currentDir = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-                IEnumerator<Product> it = SellerMainPage.Products.GetEnumerator();
+                IEnumerator<Product> it = productsTmp.GetEnumerator();
                 while (it.MoveNext())
                 {
                     Product product = it.Current;
@@ -81,8 +81,11 @@ namespace BanHang.SellerPages
         private void ModifyBtn_Click(object sender, EventArgs e)
         {
             string productID = ProductsTable.CurrentRow.Cells["IDCol"].Value.ToString();
-            ModifyProduct form = new ModifyProduct(productID);
-            form.ShowDialog();
+            if(productID != "")
+            {
+                ModifyProduct form = new ModifyProduct(productID);
+                form.ShowDialog();
+            }    
         }
 
         private void SeeVariantBtn_Click(object sender, EventArgs e)
@@ -130,8 +133,53 @@ namespace BanHang.SellerPages
 
         private void FilterPB_Click(object sender, EventArgs e)
         {
+
             this.filterControl.Visible = true;
             this.filterControl.Enabled = true;
+            this.SearchBtn.Enabled = true;
+            this.SearchBtn.Visible = true;
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            List<Product> productsFilter = new List<Product>();
+
+            SqlConnection conn = new SqlConnection(ConnectDB.connString);
+            SqlCommand cmd = new SqlCommand("dbo.filter_product", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@total_remaining_min_filter", (this.filterControl.MinRemain));
+            cmd.Parameters.AddWithValue("@total_remaining_max_filter", this.filterControl.MaxRemain);
+            cmd.Parameters.AddWithValue("@no_sales_min_filter", this.filterControl.MinNoSales);
+            cmd.Parameters.AddWithValue("@no_sales_max_filter", this.filterControl.MaxNoSales);
+            cmd.Parameters.AddWithValue("@min_price_filter", this.filterControl.MinPrice);
+            cmd.Parameters.AddWithValue("@max_price_filter", this.filterControl.MaxPrice);
+            cmd.Parameters.AddWithValue("@cat_filter", this.filterControl.CatID);
+            cmd.Parameters.AddWithValue("@sid_filter", SellerMainPage.shop.Shop_id);
+
+            conn.Open();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            conn.Close();
+
+            foreach(DataRow dr in dt.Rows)
+            {
+                Product tmp = SellerMainPage.Products.Find(x => x.Product_id == dr["product_id"].ToString());
+                int onSales = tmp.OnSales;
+                if(
+                   (onSales >= this.filterControl.MinOnSale || this.filterControl.MaxOnSale == -1) &&
+                   (onSales <= this.filterControl.MaxOnSale || this.filterControl.MinOnSale == -1) 
+                   )
+                {
+                    productsFilter.Add(tmp);
+                }    
+
+            }
+            LoadProducts(productsFilter);
+            this.filterControl.Visible = false;
+            this.filterControl.Enabled = false;
+            this.SearchBtn.Visible = false;
+            this.SearchBtn.Enabled = false;
         }
     }
 }
