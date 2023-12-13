@@ -79,7 +79,7 @@
             CloseButton.Name = "CloseButton";
             CloseButton.Size = new Size(144, 44);
             CloseButton.TabIndex = 13;
-            CloseButton.Text = "Exist";
+            CloseButton.Text = "Exit";
             CloseButton.UseVisualStyleBackColor = false;
             CloseButton.Click += CloseButton_Click;
             // 

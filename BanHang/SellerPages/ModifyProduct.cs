@@ -142,6 +142,7 @@ namespace BanHang.SellerPages
                     i++;
                 }
                 MessageBox.Show(res, "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.LoadProductInfo(this.productIDtmp);
 
             }
         }
@@ -218,6 +219,7 @@ namespace BanHang.SellerPages
         {
             AddInstance form = new AddInstance(productIDtmp);
             form.ShowDialog();
+            this.LoadProductInfo(this.productIDtmp);
         }
     }
 }

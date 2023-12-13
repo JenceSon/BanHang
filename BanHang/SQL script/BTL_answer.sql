@@ -413,9 +413,9 @@ begin
 		delete Variant where product_id = @product_id
 
 		--not exist in is contained (mean is in order) => delete
-		delete Product_instance
-		where product_id = @product_id and
-		not exists (select * from Is_contained i where i.instance_id = instance_id);
+		delete Product_instance 
+		where product_id = @product_id and instance_id not in 
+		(select pin.instance_id from Is_contained i, Product_instance pin where i.instance_id = pin.instance_id);
 
 		--exist in is contained => ref to null product_id pniffffff)
 		update Product_instance
@@ -533,7 +533,7 @@ begin
 	from Product p, Shop s, Category c
 	where
 		(@total_remaining_min_filter = -1 or p.total_remaining >= @total_remaining_min_filter) and
-		(@total_remaining_min_filter = -1 or p.total_remaining <= @total_remaining_max_filter) and
+		(@total_remaining_max_filter = -1 or p.total_remaining <= @total_remaining_max_filter) and
 		(@no_sales_min_filter = -1 or p.no_sales >= @no_sales_min_filter) and
 		(@no_sales_max_filter = -1 or p.no_sales <= @no_sales_max_filter) and
 		(@min_price_filter = -1 or p.minimum_price >= @min_price_filter) and

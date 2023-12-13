@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddInstance));
             numericUpDown1 = new NumericUpDown();
             button1 = new Button();
             label1 = new Label();
@@ -94,6 +95,7 @@
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(numericUpDown1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AddInstance";
             Text = "AddInstance";
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
