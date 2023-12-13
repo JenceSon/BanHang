@@ -270,26 +270,30 @@ on Product_instance
 for update
 as
 begin
-	declare cur Cursor for (select instance_id from inserted)
+	declare cur Cursor for (select instance_id, current_price from inserted)
 
 	declare @instance_id varchar(9)
+	declare @new_price decimal(10,1)
 
 	open cur
-	fetch next from cur into @instance_id
+	fetch next from cur into @instance_id,@new_price
 
 	while @@FETCH_STATUS = 0
 	begin
 		if exists (select * from Is_contained where instance_id = @instance_id) -- exists in order
 		begin
-			print 'Error in product instance ' + @instance_id
-			print 'Can not change current price of a instance that is in order'
-			close cur
-			deallocate cur
-			rollback transaction
-			return
+			declare @old_price decimal(10,1) = (select current_price from Product_instance where instance_id = @instance_id)
+			if(@old_price != @new_price)
+			begin
+				print 'Error in product instance ' + @instance_id
+				print 'Can not change current price of a instance that is in order'
+				close cur
+				deallocate cur
+				rollback transaction
+				return
+			end	
 		end
-
-		fetch next from cur into @instance_id
+		fetch next from cur into @instance_id,@new_price
 	end
 	close cur
 	deallocate cur
