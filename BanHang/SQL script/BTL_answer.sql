@@ -233,7 +233,7 @@ go
 -- drop trigger cal_avg_rating
 create trigger cal_avg_rating
 on Review
-after insert
+after insert,update
 as
 begin
 	declare cur Cursor for (
