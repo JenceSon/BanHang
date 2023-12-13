@@ -1,4 +1,4 @@
-﻿use BTL_db_official_demo
+﻿use BTL_db_official
 
 alter table Contact_info drop constraint [FK_user_owner]
 insert into Contact_info values
@@ -153,3 +153,23 @@ exec  dbo.insert_product
 
 go
 
+--add variant for first 5 product(special + normal) 
+insert into Variant(product_id,variant_name,price,remaining_amount,details)
+values
+('PID000000','normal',150000,50,'Normal'),
+('PID000000','special',200000,30,'Special'),
+('PID000016','normal',200000,40,'Normal'),
+('PID000016','special',300000,20,'Special'),
+('PID000017','normal',180000,100,'Normal'),
+('PID000017','special',300000,50,'Special'),
+('PID000018','normal',250000,40,'Normal'),
+('PID000018','special',400000,10,'Special'),
+('PID000019','normal',400000,80,'Normal'),
+('PID000019','special',600000,40,'Special')
+
+--add instance (UI)
+
+
+--add review for first 5 product
+
+--add order (add order -> add is_contained (many instances) -> add places)
