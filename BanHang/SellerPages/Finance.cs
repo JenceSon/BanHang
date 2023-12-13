@@ -40,6 +40,13 @@ namespace BanHang.SellerPages
 
             foreach (DataRow dr in dt.Rows)
             {
+                if (dr["product_id"].ToString() == "PIDffffff")
+                {
+                    MessageBox.Show("Invalid start date and end date", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    total = 0;
+                    break;
+                }
+
                 this.ListProductRevenue.Rows.Add(dr["product_id"], dr["name"], dr["total_revenue"]);
                 total += Convert.ToDouble(dr["total_revenue"]);
             }

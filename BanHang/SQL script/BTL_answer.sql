@@ -593,20 +593,39 @@ where Sh.shop_id = Prod_name.shop_id
 	and Ord.order_id = Cont.order_id*/
 
 go
+--drop function sum_revenue
 create function sum_revenue(@shopID varchar(9),@startDate date,@endDate date)
-returns table as
-return(
+returns @res table(product_id varchar(9), [name] varchar(50), total_revenue decimal(11,1)) 
+as
+begin
+	if @startDate > @endDate
+		insert into @res values('PIDffffff','No product', 0)
+	else
+	begin
+
+	insert into @res
 	select p.product_id,p.name,sum(pin.current_price) as total_revenue
 	from ((Product_instance pin join Is_contained i on pin.instance_id=i.instance_id)
 		join [Order] o on (o.order_id = i.order_id and o.status = 'Done'))
 		join Product p on (pin.product_id = p.product_id and p.shop_id = @shopID)
 	where cast(o.time_order as date) between @startDate and @endDate
 	group by p.product_id,p.name
-)
+	end
+
+
+	return
+end
+
 go
+--drop function list_order
 create function list_order(@buyerID varchar(9),@startDate date,@endDate date)
-returns table as
-return(
+returns @res table ([status] varchar(15), num int) as
+begin
+	if(@startDate > @endDate)
+		insert into @res values (null,null)
+	else
+	begin
+	insert into @res
 	select o.status, count(*) as num
 	from Places p, [Order] o
 	where
@@ -617,7 +636,9 @@ return(
 		(@startDate is null and cast(o.time_order as date) <= @endDate) or
 		(@endDate is null and cast(o.time_order as date) >= @startDate)) 
 	group by o.status
-	)
+	end
+	return
+end
 go
 
 /*
