@@ -230,9 +230,10 @@ begin
 end
 go
 -- trigger to calculate the avg rating of a shop base on review
+-- drop trigger cal_avg_rating
 create trigger cal_avg_rating
 on Review
-after insert, update
+after insert
 as
 begin
 	declare cur Cursor for (
