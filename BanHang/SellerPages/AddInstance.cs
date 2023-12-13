@@ -19,6 +19,7 @@ namespace BanHang.SellerPages
         {
             InitializeComponent();
             this.productID = productID;
+            this.CenterToScreen();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -26,6 +27,11 @@ namespace BanHang.SellerPages
             Product tmp = SellerMainPage.Products.Find(x => x.Product_id == this.productID);
 
             if (tmp == null) return;
+            if(tmp.TotalRemaining < this.numericUpDown1.Value)
+            {
+                MessageBox.Show("Not enough quantity in stock","Fail",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
             SqlConnection conn = new SqlConnection(ConnectDB.connString);
             SqlCommand cmd = new SqlCommand("dbo.add_instance", conn);
             cmd.CommandType = CommandType.StoredProcedure;
