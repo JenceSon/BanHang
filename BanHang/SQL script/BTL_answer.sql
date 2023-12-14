@@ -1,6 +1,6 @@
 ﻿use BTL_db_official
 go
---1/ create trigger NOTE : do trigger update n.o sale (if have time)
+--1/ create trigger 
 --drop trigger update_no_product
 create trigger update_no_product 
 on Product
@@ -197,7 +197,7 @@ begin
 			(shop_id = 'SIDffffff' or shop_id in (
 				select distinct p.shop_id from Is_contained i, Product_instance pin, Product p
 				where i.order_id = @ord and i.instance_id = pin.instance_id and pin.product_id = p.product_id))
-		) and (select quantity from Voucher where voucher_id = @vch) <= 0
+		) or (select quantity from Voucher where voucher_id = @vch) <= 0
 		begin
 			print 'Can not apply voucher due to its conditions'
 			close cur
@@ -617,7 +617,8 @@ begin
 		declare @total_revenue decimal(11,1) = 
 		(select sum(pin.current_price)
 		from Product_instance pin, Is_contained i, [Order] o
-		where pin.instance_id = i.instance_id and o.order_id = i.order_id and o.status = 'Done' and pin.product_id = @product_id)
+		where pin.instance_id = i.instance_id and o.order_id = i.order_id and o.status = 'Done' and pin.product_id = @product_id
+		and convert(date,o.time_order) between @startDate and @endDate)
 
 		if @total_revenue is null
 			set @total_revenue = 0
@@ -637,7 +638,7 @@ go
 create function list_order(@buyerID varchar(9),@startDate date,@endDate date)
 returns @res table (Confirming int, Waiting_pickup int, Delivering int, Done int, Cancelled int, Refund int) as
 begin
-	if(@startDate > @endDate)
+	if(@startDate > @endDate) and not exists (select user_id from Buyer where user_id = @buyerID)
 		insert into @res values (null,null,null,null,null,null)
 	else
 	begin
@@ -647,6 +648,7 @@ begin
 			select o.order_id, o.[status]
 			from [Order] o, Places p
 			where o.order_id = p.order_id and (p.user_id = @buyerID or p.user_id_cart = @buyerID)
+			and CONVERT(date,o.time_order) between @startDate and @endDate
 
 		declare cur cursor for select [status] from @listOrder
 		declare @status varchar(15)

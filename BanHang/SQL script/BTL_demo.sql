@@ -238,10 +238,12 @@ values
 
 exec dbo.best_selling_store @no_sales_min = 50,@no_product_min = 2
 
-select * from dbo.list_order('UID000001','2022-01-01','2023-12-13')
+select * from dbo.list_order('UID000001','2023-12-14','2023-12-14')
 
 select * from dbo.sum_revenue('SID123456','2022-01-01','2023-12-13')
 
 select * from Is_contained i, Product_instance pin where i.instance_id = pin.instance_id and pin.product_id = 'PID000000'
 
 exec dbo.delete_product @product_id = 'PID000000'
+
+insert into Applies values ('ORD30000000012','VCH000006')
