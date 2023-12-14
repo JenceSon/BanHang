@@ -579,18 +579,6 @@ begin
 	set @sid = (select shop_id from Seller s, [User] u where s.user_id = u.user_id and u.user_name = @user_name)
 	return @sid
 end
-/*select * from Shop
-select * from Product
-select * from Is_contained
-select * from Product
-select * from [Order]*/
-
-/*select sum(Prod.current_price)
-from Shop as Sh, Product as Prod_name, [Order] as Ord, Is_contained as Cont, Product as Prod
-where Sh.shop_id = Prod_name.shop_id
-	and Prod_name.product_id = Prod.product_id
-	and Prod.product_id = Cont.product_id
-	and Ord.order_id = Cont.order_id*/
 
 go
 --drop function sum_revenue
@@ -680,12 +668,6 @@ begin
 end
 go
 
-/*
-Must do
-add trigger current X
-generate ID function X
-insert place (maybe no need)
-*/
 --drop function generate_PID
 
 -- use these function/procedure for demo only
@@ -735,7 +717,7 @@ end
 go
 
 --drop function generate_IID
-create function generate_IID() -- ignore, just use to insert data more easily
+create function generate_IID() 
 returns varchar(9)
 as
 begin
@@ -792,7 +774,8 @@ begin
 	set @rs = (select count(*) as num from Product_instance where product_id = @product_id and instance_id not in(select instance_id from Is_contained))
 	return @rs
 end
-
+go
+select dbo.no_instance_on_sale('PID000024')
 go
 create procedure add_instance
 @no_add int,

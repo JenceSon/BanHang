@@ -264,3 +264,11 @@ select * from Places where order_id like 'ORD30%'
 update Variant set price = 200000, remaining_amount = 30 where product_id = 'PID000000' and variant_name = 'special'
 
 select * from dbo.sum_revenue('SID000001', '2023-01-01', '2023-12-31');
+
+declare @newPID varchar(9) = (select dbo.generate_PID())
+if @newPID not in (select product_id from Product)
+	print @newPID + ' is new product_id'
+
+declare @newIID varchar(9) = (select dbo.generate_IID())
+if @newIID not in (select instance_id from Product_instance)
+	print @newIID + ' is new instance_id'

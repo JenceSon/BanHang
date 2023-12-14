@@ -420,7 +420,6 @@ alter table Product add constraint FK_pn_sid foreign key (shop_id) references Sh
 alter table applies add constraint FK_applies_ord foreign key (order_id) references [Order](order_id)
 alter table applies add constraint FK_applies_vch foreign key (voucher_id) references Voucher(voucher_id)
 
---check if voucher could be applied in Order
 alter table Can_apply add constraint FK_canapply_cat foreign key (category_id) references Category(category_id)
 alter table Can_apply add constraint FK_canapply_vch foreign key (voucher_id) references Voucher(voucher_id)
 alter table Can_apply add constraint FK_canapply_sid foreign key (shop_id) references Shop(shop_id)
