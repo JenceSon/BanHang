@@ -598,44 +598,81 @@ create function sum_revenue(@shopID varchar(9),@startDate date,@endDate date)
 returns @res table(product_id varchar(9), [name] varchar(50), total_revenue decimal(11,1)) 
 as
 begin
-	if @startDate > @endDate
+	if @startDate > @endDate or not exists (select * from Shop where shop_id = @shopID)
 		insert into @res values('PIDffffff','No product', 0)
 	else
 	begin
+	declare @listProduct table (product_id varchar(9), [name] varchar(50))
+	insert into @listProduct select product_id, [name] from Product where shop_id = @shopID
+	declare @product_id varchar(9)
+	declare @name varchar(50)
 
-	insert into @res
-	select p.product_id,p.name,sum(pin.current_price) as total_revenue
-	from ((Product_instance pin join Is_contained i on pin.instance_id=i.instance_id)
-		join [Order] o on (o.order_id = i.order_id and o.status = 'Done'))
-		join Product p on (pin.product_id = p.product_id and p.shop_id = @shopID)
-	where cast(o.time_order as date) between @startDate and @endDate
-	group by p.product_id,p.name
+	declare cur Cursor for select * from @listProduct
+
+	open cur
+	fetch next from cur into @product_id,@name
+
+	while @@FETCH_STATUS = 0
+	begin
+		declare @total_revenue decimal(11,1) = 
+		(select sum(pin.current_price)
+		from Product_instance pin, Is_contained i, [Order] o
+		where pin.instance_id = i.instance_id and o.order_id = i.order_id and o.status = 'Done' and pin.product_id = @product_id)
+
+		if @total_revenue is null
+			set @total_revenue = 0
+		insert into @res  values(@product_id,@name,@total_revenue)
+
+		fetch next from cur into @product_id,@name
 	end
 
-
+	close cur
+	deallocate cur
+	end
 	return
 end
 
 go
 --drop function list_order
 create function list_order(@buyerID varchar(9),@startDate date,@endDate date)
-returns @res table ([status] varchar(15), num int) as
+returns @res table (Confirming int, Waiting_pickup int, Delivering int, Done int, Cancelled int, Refund int) as
 begin
 	if(@startDate > @endDate)
-		insert into @res values (null,null)
+		insert into @res values (null,null,null,null,null,null)
 	else
 	begin
-	insert into @res
-	select o.status, count(*) as num
-	from Places p, [Order] o
-	where
-		(@buyerID = p.user_id or @buyerID = p.user_id_cart) and
-		p.order_id = o.order_id and
-		((cast(o.time_order as date) between @startDate and @endDate) or
-		(@startDate is null and @endDate is null) or
-		(@startDate is null and cast(o.time_order as date) <= @endDate) or
-		(@endDate is null and cast(o.time_order as date) >= @startDate)) 
-	group by o.status
+		insert into @res values (0,0,0,0,0,0)
+		declare @listOrder table (order_id varchar(14), [status] varchar(15))
+		insert into @listOrder 
+			select o.order_id, o.[status]
+			from [Order] o, Places p
+			where o.order_id = p.order_id and (p.user_id = @buyerID or p.user_id_cart = @buyerID)
+
+		declare cur cursor for select [status] from @listOrder
+		declare @status varchar(15)
+
+		open cur
+		fetch next from cur into @status
+
+		while @@FETCH_STATUS = 0
+		begin
+			if @status = 'Done'
+				update @res set Done = Done + 1
+			else if @status = 'Confirming'
+				update @res set Confirming = Confirming + 1
+			else if @status = 'Waiting pickup'
+				update @res set Waiting_pickup = Waiting_pickup + 1
+			else if @status = 'Delivering'
+				update @res set Delivering = Delivering + 1
+			else if @status = 'Cancelled'
+				update @res set Cancelled = Cancelled + 1
+			else if @status = 'Refund'
+				update @res set Refund = Refund + 1
+
+			fetch next from cur into @status
+		end
+		close cur
+		deallocate cur
 	end
 	return
 end
