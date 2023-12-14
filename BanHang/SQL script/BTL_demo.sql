@@ -242,8 +242,25 @@ select * from dbo.list_order('UID000001','2023-12-14','2023-12-14')
 
 select * from dbo.sum_revenue('SID123456','2022-01-01','2023-12-13')
 
-select * from Is_contained i, Product_instance pin where i.instance_id = pin.instance_id and pin.product_id = 'PID000000'
-
 exec dbo.delete_product @product_id = 'PID000000'
 
 insert into Applies values ('ORD30000000012','VCH000006')
+
+select * from Product where shop_id = 'SID123456'
+
+select * from [User] where user_id = 'UID123456'
+
+select v.product_id, v.variant_name, v.price, v.remaining_amount, v.details from Variant v, Product p where p.shop_id = 'SID123456' and p.product_id =v.product_id
+
+select * from Variant where product_id = 'PID000000'
+select * from Product where product_id = 'PID000000'
+
+select * from Review where product_id in (select product_id from Product where shop_id = 'SID123456')
+
+select * from [Order] where order_id like 'ORD30%'
+select p.product_id,i.instance_id, i.order_id from Is_contained i, Product p where order_id like 'ORD30%'
+select * from Places where order_id like 'ORD30%'
+
+update Variant set price = 200000, remaining_amount = 30 where product_id = 'PID000000' and variant_name = 'special'
+
+select * from dbo.sum_revenue('SID000001', '2023-01-01', '2023-12-31');
