@@ -236,7 +236,7 @@ values
 ('ORD30000000011','UID000001',1),
 ('ORD30000000012','UID000001',1)
 
-exec dbo.best_selling_store @no_sales_min = 50,@no_product_min = 2
+exec dbo.best_selling_store @no_sales_min = 50,@no_product_min = 3
 
 select * from dbo.list_order('UID000001','2023-12-14','2023-12-14')
 
